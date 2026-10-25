@@ -53,12 +53,13 @@
           "image": "https://shiaulon.github.io/doutordasarmas/logo.png",
           "description": "Oficina especializada em armas curtas e longas credenciada pela Polícia Federal em Ribeirão Preto - SP. Manutenção preventiva e corretiva, customização de peças, revestimento Cerakote, oxidação negra, alívio de gatilho e assessoria documental.",
           "telephone": ["+55-16-99113-7690", "+55-16-99136-4721"],
+          "email": "dr.dasarmas@outlook.com",
           "priceRange": "$$",
           "currenciesAccepted": "BRL",
           "paymentAccepted": "Cash, Credit Card, PIX",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Rua Florinda Sampaio, 616",
+            "streetAddress": "Rua Elpídio Gomes, 338",
             "addressLocality": "Ribeirão Preto",
             "addressRegion": "SP",
             "postalCode": "14091-230",
@@ -66,21 +67,15 @@
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": -21.1767,
-            "longitude": -47.8208
+            "latitude": -21.1824,
+            "longitude": -47.8210
           },
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
               "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
               "opens": "08:00",
-              "closes": "18:00"
-            },
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Saturday"],
-              "opens": "08:00",
-              "closes": "13:00"
+              "closes": "17:00"
             }
           ],
           "areaServed": [
@@ -1086,15 +1081,15 @@
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                                 <button type="button" onclick="selectCompareModel(0)" id="cmp-tab-0" class="compare-tab-btn active-compare-tab p-2.5 rounded-lg bg-zinc-950 border border-rose-500 text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
                                     <i class="ph-fill ph-wrench text-rose-500 text-base"></i>
-                                    <span class="leading-tight">Taurus Inox<br><span class="text-[10px] text-slate-400 font-normal">Bancada</span></span>
+                                    <span class="leading-tight">Taurus Inox<br><span class="text-[10px] text-slate-400 font-normal">Oficina Real</span></span>
                                 </button>
                                 <button type="button" onclick="selectCompareModel(1)" id="cmp-tab-1" class="compare-tab-btn p-2.5 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
-                                    <i class="ph-fill ph-sparkle text-amber-400 text-base"></i>
-                                    <span class="leading-tight">Taurus Inox<br><span class="text-[10px] text-slate-400 font-normal">Espelhada</span></span>
+                                    <i class="ph-fill ph-shield-star text-rose-500 text-base"></i>
+                                    <span class="leading-tight">Revólver .38<br><span class="text-[10px] text-slate-400 font-normal">Oxidação Real</span></span>
                                 </button>
                                 <button type="button" onclick="selectCompareModel(2)" id="cmp-tab-2" class="compare-tab-btn p-2.5 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
-                                    <i class="ph-fill ph-shield-star text-rose-500 text-base"></i>
-                                    <span class="leading-tight">Revólver .38<br><span class="text-[10px] text-slate-400 font-normal">Oxidação</span></span>
+                                    <i class="ph-fill ph-sparkle text-amber-400 text-base"></i>
+                                    <span class="leading-tight">Taurus Inox<br><span class="text-[10px] text-slate-400 font-normal">Espelhada</span></span>
                                 </button>
                                 <button type="button" onclick="selectCompareModel(3)" id="cmp-tab-3" class="compare-tab-btn p-2.5 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
                                     <i class="ph-fill ph-crosshair text-cyan-400 text-base"></i>
@@ -1117,13 +1112,13 @@
                             
                             <!-- CAMADA DE FUNDO: DEPOIS (FOTO REAL DE ALTA QUALIDADE) -->
                             <div class="absolute inset-0 flex items-center justify-center bg-zinc-950 pointer-events-none">
-                                <img id="compare-img-after" src="taurus-workbench-depois.jpg" alt="Arma após restauração profissional" class="w-full h-full object-cover select-none pointer-events-none transition-opacity duration-300">
+                                <img id="compare-img-after" src="taurus-real-depois.jpg" alt="Arma após restauração profissional" class="w-full h-full object-cover select-none pointer-events-none transition-opacity duration-300">
                             </div>
 
                             <!-- CAMADA SUPERIOR RECORTADA: ANTES (FOTO REAL DO ESTADO ORIGINAL) -->
                             <div id="compare-before" class="absolute inset-y-0 left-0 overflow-hidden pointer-events-none" style="width: 50%;">
                                 <div id="compare-before-inner" class="h-full relative overflow-hidden pointer-events-none">
-                                    <img id="compare-img-before" src="taurus-workbench-antes.jpg" alt="Arma antes da restauração" class="absolute top-0 left-0 h-full max-w-none object-cover select-none pointer-events-none transition-opacity duration-300">
+                                    <img id="compare-img-before" src="taurus-real-antes.jpg" alt="Arma antes da restauração" class="absolute top-0 left-0 h-full max-w-none object-cover select-none pointer-events-none transition-opacity duration-300">
                                 </div>
                             </div>
 
@@ -1543,6 +1538,30 @@
                                 </div>
                             </div>
 
+                            <!-- Card E-mail Oficial -->
+                            <div class="p-4 rounded-xl bg-black/60 border border-white/10 hover:border-cyan-500/50 transition-all duration-200 group">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-lg bg-cyan-500/20 border border-cyan-500/60 flex items-center justify-center text-cyan-400 shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                                        <i class="ph-fill ph-envelope-simple text-2xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="font-rajdhani text-xs uppercase tracking-widest text-cyan-400 block font-semibold">Comunicação Oficial</span>
+                                        <h4 class="font-orbitron font-bold text-base text-white group-hover:text-cyan-400 transition truncate">dr.dasarmas@outlook.com</h4>
+                                        <p class="text-slate-400 text-xs mt-0.5">Orçamentos institucionais, laudos e documentação técnica</p>
+                                        <div class="flex flex-wrap items-center gap-2 mt-2">
+                                            <a href="mailto:dr.dasarmas@outlook.com"
+                                               class="text-xs text-cyan-400 hover:text-cyan-300 uppercase font-rajdhani font-bold flex items-center gap-1 bg-zinc-800 px-2.5 py-1 rounded border border-white/5 hover:border-cyan-500/50 transition">
+                                                <i class="ph-bold ph-paper-plane-tilt"></i> Enviar Mensagem
+                                            </a>
+                                            <button onclick="copyText('dr.dasarmas@outlook.com', 'E-mail oficial copiado com sucesso!')"
+                                                    class="text-xs text-slate-400 hover:text-white uppercase font-rajdhani font-bold flex items-center gap-1 bg-zinc-800 px-2 py-0.5 rounded border border-white/5 hover:border-zinc-500 transition">
+                                                <i class="ph-bold ph-copy"></i> Copiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Card Endereço Oficial -->
                             <div class="p-4 rounded-xl bg-black/60 border border-white/10 hover:border-amber-500/50 transition-all duration-200 group">
                                 <div class="flex items-start gap-4">
@@ -1552,7 +1571,7 @@
                                     <div class="flex-1 min-w-0">
                                         <span class="font-rajdhani text-xs uppercase tracking-widest text-slate-400 block font-semibold">Oficina Credenciada Polícia Federal</span>
                                         <h4 class="font-orbitron font-black text-base text-white">Rua Elpídio Gomes, 338</h4>
-                                        <p class="text-slate-300 text-sm mt-0.5">Ribeirão Preto - SP</p>
+                                        <p class="text-slate-300 text-sm mt-0.5">Ribeirão Preto - SP • <span class="text-amber-400 font-bold">Seg a Sex: 08:00 às 17:00</span></p>
                                         <div class="flex flex-wrap items-center gap-2 mt-2">
                                             <button onclick="copyText('Rua Elpídio Gomes 338, Ribeirão Preto - SP', 'Endereço copiado para a área de transferência!')"
                                                     class="text-xs text-amber-400 hover:text-amber-300 uppercase font-rajdhani font-bold flex items-center gap-1 bg-zinc-800 px-2.5 py-1 rounded border border-white/5 hover:border-amber-500/50 transition">
@@ -1566,7 +1585,7 @@
                     </div>
 
                     <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 font-rajdhani">
-                        <span class="flex items-center gap-1.5"><i class="ph-fill ph-seal-check text-rose-500 text-base"></i> ATENDIMENTO TÉCNICO AGENDADO</span>
+                        <span class="flex items-center gap-1.5"><i class="ph-fill ph-clock text-rose-500 text-base"></i> HORÁRIO: SEG A SEX 08:00 ÀS 17:00</span>
                         <span class="text-amber-400 font-bold uppercase tracking-wider">CUSTÓDIA SEGURA & REGISTRADA</span>
                     </div>
                 </div>
@@ -1734,8 +1753,12 @@
                             <span>Rua Elpídio Gomes, 338<br><span class="text-slate-400">Ribeirão Preto - SP</span></span>
                         </p>
                         <p class="flex items-center gap-2">
+                            <i class="ph-fill ph-envelope-simple text-cyan-400 text-base shrink-0"></i>
+                            <a href="mailto:dr.dasarmas@outlook.com" class="hover:text-cyan-300 transition text-slate-300">dr.dasarmas@outlook.com</a>
+                        </p>
+                        <p class="flex items-center gap-2">
                             <i class="ph-fill ph-clock text-amber-400 text-base shrink-0"></i>
-                            <span>Segunda a Sexta: <strong>08:00 às 18:00</strong></span>
+                            <span>Segunda a Sexta: <strong>08:00 às 17:00</strong></span>
                         </p>
                         <p class="flex items-center gap-2 text-xs text-emerald-400">
                             <i class="ph-fill ph-calendar-check text-base shrink-0"></i>
@@ -1989,16 +2012,28 @@
         // 2. Slider Comparador Antes & Depois (Interativo: Arraste com Mouse, Touch e Range)
         const compareModels = [
             {
-                badge: "// LABORATÓRIO DE ACABAMENTO • POLIMENTO TÉCNICO",
-                title: "TAURUS INOX <span class=\"text-rose-500 glow-red-text\">RESTAURAÇÃO</span> DE BANCADA",
-                desc: "Desmontagem em 3º escalão, banho químico de desincrustação ultrassônica, eliminação de riscos de atrito e marcas severas de oxidação superficial, com polimento técnico de armação e ferrolho mantendo as tolerâncias originais.",
+                badge: "// OFICINA REAL • RESTAURAÇÃO COMPLETA DE BANCADA",
+                title: "TAURUS INOX <span class=\"text-rose-500 glow-red-text\">RESTAURAÇÃO</span> REAL DE BANCADA",
+                desc: "Trabalho real de bancada em nossa oficina: desmontagem em 3º escalão de pistola Taurus em aço inoxidável severamente afetada por oxidação, incrustação e fuligem. Realizado banho químico de desoxidação ultrassônica, recuperação de serrilhados e polimento técnico cirúrgico preservando todas as tolerâncias originais.",
                 specs: [
-                    "Eliminação cirúrgica de micro-oxidação e riscos de coldre",
-                    "Polimento técnico da rampa de alimentação e culatra",
-                    "Substituição de pinos e molas com rastreabilidade PF"
+                    "Eliminação total de corrosão e marcas de oxidação no aço",
+                    "Polimento técnico do ferrolho, armação e rampa de alimentação",
+                    "Revisão mecânica das travas, percussor e conjunto de molas"
                 ],
-                beforeImg: "taurus-workbench-antes.jpg",
-                afterImg: "taurus-workbench-depois.jpg"
+                beforeImg: "taurus-real-antes.jpg",
+                afterImg: "taurus-real-depois.jpg"
+            },
+            {
+                badge: "// RESTAURAÇÃO REAL • OXIDAÇÃO NEGRA A QUENTE",
+                title: "REVÓLVER .38 <span class=\"text-rose-500 glow-red-text\">OXIDAÇÃO NEGRA</span> & POLIMENTO",
+                desc: "Restauração real executada em nossa bancada: revólver calibre .38 com oxidação desgastada pelo tempo e tambor oxidado. Realizado banho químico de oxidação negra espelhada a quente (Hot Salt Blueing), polimento de alta lustração no tambor em inox e retífica fina do cão e gatilho.",
+                specs: [
+                    "Oxidação negra profunda e brilhante com máxima resistência a suor",
+                    "Polimento espelhado do tambor, cão, gatilho e trava",
+                    "Revitalização ergonômica da empunhadura e ajuste de folgas"
+                ],
+                beforeImg: "revolver-real-antes.jpg",
+                afterImg: "revolver-real-depois.jpg"
             },
             {
                 badge: "// POLIMENTO ARTESANAL • ALTO BRILHO ESPELHADO",
@@ -2011,18 +2046,6 @@
                 ],
                 beforeImg: "taurus-workbench-antes.jpg",
                 afterImg: "taurus-hand-depois.jpg"
-            },
-            {
-                badge: "// RESTAURAÇÃO CLÁSSICA • OXIDAÇÃO A QUENTE",
-                title: "REVÓLVER .38 <span class=\"text-rose-500 glow-red-text\">OXIDAÇÃO NEGRA</span> PROFUNDA",
-                desc: "Restauração histórica de revólver clássico atacado por ferrugem e desgaste severo. Realizado jateamento fino de microesferas de vidro, banho químico a quente (Hot Salt Blueing) e restauração das empunhaduras de nogueira com verniz naval.",
-                specs: [
-                    "Oxidação negra profunda acetinada padrão militar",
-                    "Restauração artesanal de talas de madeira nobre",
-                    "Ajuste de folga de tambor e alinhamento do cão"
-                ],
-                beforeImg: "revolver-antes.jpg",
-                afterImg: "revolver-depois.jpg"
             },
             {
                 badge: "// CUSTOMIZAÇÃO TÁTICA • COMPETIÇÃO & DEFESA",
