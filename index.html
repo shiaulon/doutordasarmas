@@ -1074,26 +1074,22 @@
                                     <i class="ph-fill ph-crosshair text-rose-500"></i> Escolha o modelo para comparar:
                                 </span>
                                 <span id="compare-tag-active" class="font-orbitron text-[10px] text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded uppercase">
-                                    Modelo 1 de 4
+                                    Modelo 1 de 3
                                 </span>
                             </div>
 
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                                <button type="button" onclick="selectCompareModel(0)" id="cmp-tab-0" class="compare-tab-btn active-compare-tab p-2.5 rounded-lg bg-zinc-950 border border-rose-500 text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
-                                    <i class="ph-fill ph-wrench text-rose-500 text-base"></i>
-                                    <span class="leading-tight">Taurus Inox<br><span class="text-[10px] text-slate-400 font-normal">Oficina Real</span></span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                <button type="button" onclick="selectCompareModel(0)" id="cmp-tab-0" class="compare-tab-btn active-compare-tab p-3 rounded-lg bg-zinc-950 border border-rose-500 text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1.5 transition">
+                                    <i class="ph-fill ph-wrench text-rose-500 text-lg"></i>
+                                    <span class="leading-tight">Taurus Inox<br><span class="text-[10px] text-slate-400 font-normal">Oficina Bancada Real</span></span>
                                 </button>
-                                <button type="button" onclick="selectCompareModel(1)" id="cmp-tab-1" class="compare-tab-btn p-2.5 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
-                                    <i class="ph-fill ph-gear-six text-amber-400 text-base"></i>
-                                    <span class="leading-tight">Revólver .38<br><span class="text-[10px] text-slate-400 font-normal">Desmonte 3º Esc.</span></span>
+                                <button type="button" onclick="selectCompareModel(1)" id="cmp-tab-1" class="compare-tab-btn p-3 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1.5 transition">
+                                    <i class="ph-fill ph-gear-six text-amber-400 text-lg"></i>
+                                    <span class="leading-tight">Revólver .38<br><span class="text-[10px] text-slate-400 font-normal">Desmonte 3º Escalão</span></span>
                                 </button>
-                                <button type="button" onclick="selectCompareModel(2)" id="cmp-tab-2" class="compare-tab-btn p-2.5 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
-                                    <i class="ph-fill ph-shield-star text-rose-500 text-base"></i>
-                                    <span class="leading-tight">Revólver .38<br><span class="text-[10px] text-slate-400 font-normal">Oxidação Real</span></span>
-                                </button>
-                                <button type="button" onclick="selectCompareModel(3)" id="cmp-tab-3" class="compare-tab-btn p-2.5 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1 transition">
-                                    <i class="ph-fill ph-sparkle text-cyan-400 text-base"></i>
-                                    <span class="leading-tight">Taurus Inox<br><span class="text-[10px] text-slate-400 font-normal">Espelhada</span></span>
+                                <button type="button" onclick="selectCompareModel(2)" id="cmp-tab-2" class="compare-tab-btn p-3 rounded-lg bg-zinc-950 border border-white/10 text-slate-400 hover:text-white font-orbitron text-xs flex flex-col items-center justify-center text-center gap-1.5 transition">
+                                    <i class="ph-fill ph-shield-star text-rose-500 text-lg"></i>
+                                    <span class="leading-tight">Revólver .38<br><span class="text-[10px] text-slate-400 font-normal">Oxidação Negra Real</span></span>
                                 </button>
                             </div>
                         </div>
@@ -2046,18 +2042,6 @@
                 ],
                 beforeImg: "revolver-real-antes.jpg",
                 afterImg: "revolver-real-depois.jpg"
-            },
-            {
-                badge: "// POLIMENTO ARTESANAL • ALTO BRILHO ESPELHADO",
-                title: "TAURUS INOX <span class=\"text-amber-400 glow-red-text\">ESPELHADA</span> (MIRROR FINISH)",
-                desc: "Processo exclusivo de lapidação de superfície em aço inoxidável com pastas de diamante e feltros de alta rotação. O resultado é um reflexo espelhado impecável que protege o metal contra suor ácido e valoriza o armamento.",
-                specs: [
-                    "Polimento espelhado cirúrgico de alta lustração",
-                    "Revitalização de talas anatômicas e serrilhados",
-                    "Proteção hidrofóbica anticorrosiva de longa duração"
-                ],
-                beforeImg: "taurus-workbench-antes.jpg",
-                afterImg: "taurus-hand-depois.jpg"
             }
         ];
 
@@ -2082,7 +2066,7 @@
 
             // Atualiza tag
             const tagActive = document.getElementById('compare-tag-active');
-            if (tagActive) tagActive.textContent = `Modelo ${index + 1} de 4`;
+            if (tagActive) tagActive.textContent = `Modelo ${index + 1} de 3`;
 
             // Atualiza textos
             const badge = document.getElementById('compare-model-badge');
