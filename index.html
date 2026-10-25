@@ -242,6 +242,32 @@
             border: 1px solid #e11d48 !important;
             box-shadow: 0 0 25px rgba(225, 29, 72, 0.45) !important;
         }
+        .leaflet-tile-tactical {
+            filter: brightness(0.65) invert(1) contrast(2.4) hue-rotate(200deg) saturate(0.35) brightness(0.72) !important;
+        }
+        .leaflet-control-zoom {
+            border: 1px solid rgba(225, 29, 72, 0.5) !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+        }
+        .leaflet-control-zoom a {
+            background: #101116 !important;
+            color: #f1f5f9 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            transition: all 0.2s ease !important;
+        }
+        .leaflet-control-zoom a:hover {
+            background: #e11d48 !important;
+            color: #fff !important;
+        }
+
+        /* Comparador Antes & Depois Interativo Arrastável */
+        #compare-container {
+            touch-action: none;
+            cursor: ew-resize;
+            user-select: none;
+            -webkit-user-select: none;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-rose-600 selection:text-white">
@@ -326,8 +352,8 @@
                     <span class="hidden md:inline" id="sound-label">SFX ON</span>
                 </button>
 
-                <a href="#simulador" class="hidden sm:flex clip-tactical-btn bg-rose-600 hover:bg-rose-500 text-white font-orbitron font-bold text-xs px-4 py-2.5 tracking-wider uppercase shadow-[0_0_20px_rgba(225,29,72,0.5)] hover:shadow-[0_0_30px_rgba(225,29,72,0.85)] transition items-center gap-2 whitespace-nowrap">
-                    <i class="ph-bold ph-wrench"></i>
+                <a href="https://wa.me/5516991137690?text=Ol%C3%A1%20Renato%20Capel%2C%20vim%20pelo%20site%20Dr.%20das%20Armas%20e%20gostaria%20de%20um%20or%C3%A7amento%20r%C3%A1pido!" target="_blank" rel="noopener noreferrer" class="hidden sm:flex clip-tactical-btn bg-emerald-600 hover:bg-emerald-500 text-white font-orbitron font-bold text-xs px-4 py-2.5 tracking-wider uppercase shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_rgba(16,185,129,0.8)] transition items-center gap-2 whitespace-nowrap">
+                    <i class="ph-fill ph-whatsapp-logo text-base text-white"></i>
                     <span>Orçamento Rápido</span>
                 </a>
 
@@ -693,16 +719,19 @@
                 <!-- Slider Comparador Interativo -->
                 <div class="lg:col-span-7">
                     <div class="clip-tactical border-2 border-rose-500/40 bg-zinc-900 p-4 sm:p-6 relative select-none shadow-[0_0_40px_rgba(225,29,72,0.18)]">
-                        <div class="flex items-center justify-between text-xs font-orbitron uppercase mb-3 px-1">
+                        <div class="flex flex-wrap items-center justify-between text-xs font-orbitron uppercase mb-3 gap-2 px-1">
                             <span class="text-slate-400 flex items-center gap-1.5"><i class="ph-fill ph-warning-octagon text-amber-500"></i> ANTES: OXIDAÇÃO & DESGASTE</span>
+                            <span class="text-emerald-400 font-rajdhani font-bold tracking-widest text-[11px] uppercase bg-zinc-950 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+                                <i class="ph-bold ph-hand-pointing"></i> Clique e arraste na imagem
+                            </span>
                             <span class="text-rose-400 flex items-center gap-1.5"><i class="ph-fill ph-sparkle text-rose-500"></i> DEPOIS: CUSTOM DR. DAS ARMAS</span>
                         </div>
 
-                        <!-- Container Visual da Comparação -->
-                        <div id="compare-container" class="relative w-full h-[270px] sm:h-[340px] rounded-xl overflow-hidden bg-[#090a0f] border border-white/10">
+                        <!-- Container Visual da Comparação (Arrastável com Mouse ou Touch) -->
+                        <div id="compare-container" class="relative w-full h-[280px] sm:h-[360px] rounded-xl overflow-hidden bg-[#090a0f] border border-white/10 cursor-ew-resize select-none touch-none shadow-inner group">
                             
                             <!-- CAMADA DE FUNDO: DEPOIS (CUSTOMIZADA TÁTICA) -->
-                            <div class="absolute inset-0 flex items-center justify-center p-6 bg-gradient-to-br from-zinc-950 via-rose-950/25 to-zinc-950">
+                            <div class="absolute inset-0 flex items-center justify-center p-6 bg-gradient-to-br from-zinc-950 via-rose-950/25 to-zinc-950 pointer-events-none">
                                 <svg viewBox="0 0 700 350" class="w-full h-full max-h-[290px] drop-shadow-[0_0_20px_rgba(225,29,72,0.5)]">
                                     <text x="430" y="45" fill="#fb7185" font-family="Orbitron" font-size="13" font-weight="bold">ACABAMENTO TÁTICO TUNGSTEN + CRIMSON</text>
                                     <!-- Pistola Customizada (Cores Táticas, Red Dot, Gatilho Vermelho, Cano Dourado TiN) -->
@@ -731,8 +760,8 @@
                             </div>
 
                             <!-- CAMADA SUPERIOR RECORTADA: ANTES (DESGASTADA / OXIDADA) -->
-                            <div id="compare-before" class="absolute inset-0 overflow-hidden" style="width: 50%;">
-                                <div class="w-full h-full flex items-center justify-center p-6 bg-gradient-to-br from-stone-900 via-zinc-900 to-stone-950" id="compare-before-inner">
+                            <div id="compare-before" class="absolute inset-y-0 left-0 overflow-hidden pointer-events-none" style="width: 50%;">
+                                <div class="h-full flex items-center justify-center p-6 bg-gradient-to-br from-stone-900 via-zinc-900 to-stone-950" id="compare-before-inner">
                                     <svg viewBox="0 0 700 350" class="w-full h-full max-h-[290px] grayscale contrast-75">
                                         <text x="30" y="45" fill="#a8a29e" font-family="Orbitron" font-size="13" font-weight="bold">ESTADO ORIGINAL // DESGASTE E FERRUGEM</text>
                                         <g>
@@ -753,17 +782,23 @@
                                 </div>
                             </div>
 
-                            <!-- Linha Divisória Laser -->
-                            <div id="compare-line" class="absolute top-0 bottom-0 left-1/2 w-1 bg-rose-500 shadow-[0_0_15px_#ff0033] pointer-events-none flex items-center justify-center">
-                                <div class="w-9 h-9 rounded-full bg-rose-600 border-2 border-white shadow-lg flex items-center justify-center text-white">
-                                    <i class="ph-bold ph-arrows-left-right text-sm"></i>
+                            <!-- Linha Divisória Laser Interativa -->
+                            <div id="compare-line" class="absolute top-0 bottom-0 left-1/2 w-1 bg-rose-500 shadow-[0_0_20px_#ff0033] pointer-events-none flex items-center justify-center -translate-x-1/2 transition-shadow">
+                                <div class="w-10 h-10 rounded-full bg-rose-600 border-2 border-white shadow-[0_0_15px_rgba(225,29,72,0.8)] flex items-center justify-center text-white scale-100 group-hover:scale-110 transition-transform">
+                                    <i class="ph-bold ph-arrows-left-right text-base animate-pulse"></i>
                                 </div>
+                            </div>
+
+                            <!-- Badge de Instrução Flutuante -->
+                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-rajdhani text-slate-300 uppercase tracking-widest pointer-events-none flex items-center gap-1.5 opacity-80 group-hover:opacity-100 transition">
+                                <i class="ph-bold ph-cursor text-rose-400"></i>
+                                <span>Arraste para comparar os detalhes</span>
                             </div>
                         </div>
 
-                        <!-- Controle Range Acessível para Mouse e Touch -->
+                        <!-- Controle Range Acessível para Sincronização -->
                         <div class="mt-4 flex items-center gap-4">
-                            <span class="font-rajdhani text-xs uppercase text-slate-400">Original</span>
+                            <span class="font-rajdhani text-xs uppercase text-slate-400 font-bold">Original</span>
                             <input id="compare-slider" type="range" min="5" max="95" value="50" oninput="updateComparison(this.value)"
                                    class="w-full accent-rose-600 cursor-pointer h-2 bg-zinc-800 rounded-lg">
                             <span class="font-rajdhani text-xs uppercase text-rose-400 font-bold">Customizada</span>
@@ -1031,147 +1066,368 @@
                     </div>
                 </div>
 
-    <!-- CONTATO E RADAR TÁTICO REAL EM RIBEIRÃO PRETO (Mapa 100% Funcional via Leaflet) -->
-    <section id="contato" class="py-20 relative z-10">
-        <div class="w-full max-w-[1680px] mx-auto px-4 sm:px-6 xl:px-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                
-                <!-- Informações de Contato Direto -->
-                <div class="lg:col-span-5 clip-tactical bg-zinc-900/90 border border-zinc-800 p-7 sm:p-9 flex flex-col justify-between">
-                    <div>
-                        <span class="font-rajdhani font-bold text-rose-500 tracking-[0.25em] uppercase text-xs block mb-2">
-                            // BASE OPERACIONAL RIBEIRÃO PRETO
-                        </span>
-                        <h2 class="font-orbitron font-black text-3xl text-white uppercase mb-6">
-                            CONTATO & <span class="text-rose-500">ENDEREÇO</span>
-                        </h2>
-
-                        <div class="space-y-5">
-                            <!-- Daniel -->
-                            <div class="flex items-start gap-4 p-4 rounded-xl bg-black/50 border border-white/5 hover:border-rose-500/40 transition">
-                                <div class="w-12 h-12 rounded-lg bg-rose-600/20 border border-rose-500 flex items-center justify-center text-rose-500 shrink-0">
-                                    <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <span class="font-rajdhani text-xs uppercase tracking-widest text-slate-400 block">Especialista / Atendimento</span>
-                                    <h3 class="font-orbitron font-bold text-lg text-white">Daniel</h3>
-                                    <div class="flex items-center gap-3 mt-1">
-                                        <a href="https://wa.me/5516991364721" target="_blank" class="text-rose-400 hover:text-rose-300 font-rajdhani font-bold text-base">(16) 99136-4721</a>
-                                        <button onclick="copyText('(16) 99136-4721', 'Telefone de Daniel copiado!')" class="text-xs text-slate-400 hover:text-white underline font-rajdhani">Copiar</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Renato Capel -->
-                            <div class="flex items-start gap-4 p-4 rounded-xl bg-black/50 border border-white/5 hover:border-rose-500/40 transition">
-                                <div class="w-12 h-12 rounded-lg bg-rose-600/20 border border-rose-500 flex items-center justify-center text-rose-500 shrink-0">
-                                    <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <span class="font-rajdhani text-xs uppercase tracking-widest text-slate-400 block">Especialista / Atendimento</span>
-                                    <h3 class="font-orbitron font-bold text-lg text-white">Renato Capel</h3>
-                                    <div class="flex items-center gap-3 mt-1">
-                                        <a href="https://wa.me/5516991137690" target="_blank" class="text-rose-400 hover:text-rose-300 font-rajdhani font-bold text-base">(16) 99113-7690</a>
-                                        <button onclick="copyText('(16) 99113-7690', 'Telefone de Renato Capel copiado!')" class="text-xs text-slate-400 hover:text-white underline font-rajdhani">Copiar</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Endereço Físico -->
-                            <div class="flex items-start gap-4 p-4 rounded-xl bg-black/50 border border-white/5 hover:border-rose-500/40 transition">
-                                <div class="w-12 h-12 rounded-lg bg-amber-500/20 border border-amber-500 flex items-center justify-center text-amber-400 shrink-0">
-                                    <i class="ph-fill ph-map-pin text-2xl"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <span class="font-rajdhani text-xs uppercase tracking-widest text-slate-400 block">Localização da Oficina</span>
-                                    <h3 class="font-orbitron font-bold text-base text-white">R. Elpídio Gomes, 338</h3>
-                                    <p class="text-slate-300 text-sm">Ribeirão Preto - SP</p>
-                                    <button onclick="copyText('R. Elpídio Gomes 338, Ribeirão Preto - SP', 'Endereço copiado para a área de transferência!')" class="mt-1.5 text-xs text-amber-400 hover:text-amber-300 font-rajdhani uppercase tracking-wider flex items-center gap-1">
-                                        <i class="ph-bold ph-copy"></i> Copiar Endereço
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8 pt-4 border-t border-white/10 text-xs text-slate-400 font-rajdhani flex items-center justify-between">
-                        <span>QUALIDADE • TÉCNICA • EXPERIÊNCIA</span>
-                        <span class="text-emerald-400 font-bold">● ATENDIMENTO AGENDADO</span>
+                <!-- Etapa 3: Modelo e Observações -->
+                <div>
+                    <label for="weapon-model" class="block font-orbitron font-bold text-xs uppercase tracking-wider text-rose-400 mb-2">
+                        3. Modelo, Marca ou Observações Especiais (Opcional):
+                    </label>
+                    <div class="relative">
+                        <input type="text" id="weapon-model" placeholder="Ex: Taurus G2C 9mm, Glock G19 Gen5, Imbel MD1, Boito Miura..."
+                               class="w-full bg-zinc-900/90 border border-zinc-700 focus:border-rose-500 rounded-lg px-4 py-3 text-sm text-white placeholder-slate-500 font-rajdhani tracking-wider focus:outline-none focus:ring-1 focus:ring-rose-500 transition">
+                        <i class="ph-bold ph-pencil-simple text-slate-500 absolute right-4 top-1/2 -translate-y-1/2 text-lg"></i>
                     </div>
                 </div>
 
-                <!-- Mapa Interativo Real (Leaflet Dark Tático + Varredura de Radar) -->
-                <div class="lg:col-span-7 clip-tactical border border-rose-500/40 bg-zinc-950 relative overflow-hidden min-h-[440px] flex flex-col shadow-[0_0_40px_rgba(225,29,72,0.15)]">
-                    <!-- Barra Superior do Radar -->
-                    <div class="bg-zinc-900/95 border-b border-rose-500/30 px-4 py-3 flex flex-wrap items-center justify-between gap-2 z-20">
-                        <div class="flex items-center gap-2 font-orbitron text-xs text-rose-400 font-bold">
-                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
-                            <span>RADAR GPS // R. ELPÍDIO GOMES, 338 - RIBEIRÃO PRETO</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button onclick="recenterMap()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-rose-600 text-xs font-rajdhani font-bold text-white uppercase tracking-wider transition flex items-center gap-1">
-                                <i class="ph-bold ph-crosshair"></i> Centralizar Alvo
-                            </button>
-                            <button onclick="toggleRadarOverlay()" id="radar-btn" class="px-2.5 py-1 rounded bg-rose-600/20 border border-rose-500/50 text-xs font-rajdhani font-bold text-rose-300 uppercase tracking-wider transition">
-                                Radar HUD: ON
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Container do Mapa Leaflet + Overlay de Radar -->
-                    <div class="relative flex-1 min-h-[350px] w-full">
-                        <div id="tactical-map" class="absolute inset-0 z-10 w-full h-full"></div>
-
-                        <!-- Overlay de Varredura de Radar Militar (Não bloqueia cliques no mapa) -->
-                        <div id="radar-overlay" class="absolute inset-0 z-20 pointer-events-none flex items-center justify-center overflow-hidden">
-                            <div class="w-[460px] h-[460px] rounded-full border border-rose-500/25 flex items-center justify-center relative">
-                                <div class="w-[300px] h-[300px] rounded-full border border-rose-500/20"></div>
-                                <div class="w-[140px] h-[140px] rounded-full border border-rose-500/25"></div>
-                                <div class="absolute inset-0 rounded-full radar-cone"></div>
+                <!-- Etapa 4: Escolha do Especialista e Envio Direto -->
+                <div class="pt-4 border-t border-white/10 space-y-4">
+                    <span class="block font-orbitron font-bold text-xs uppercase tracking-wider text-slate-300">
+                        4. Enviar Ordem de Serviço Direto para o WhatsApp:
+                    </span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <button type="button" onclick="sendTacticalOrder('renato')"
+                                class="clip-tactical-btn bg-emerald-600 hover:bg-emerald-500 text-white p-4 font-orbitron font-bold text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(16,185,129,0.35)] hover:shadow-[0_0_35px_rgba(16,185,129,0.7)] transition flex items-center justify-center gap-3">
+                            <i class="ph-fill ph-whatsapp-logo text-2xl text-white"></i>
+                            <div class="text-left leading-tight">
+                                <span class="block text-[10px] text-emerald-200 font-rajdhani font-semibold">ESPECIALISTA EM CUSTOMIZAÇÃO</span>
+                                <span class="text-sm">Enviar para Renato Capel</span>
                             </div>
-                        </div>
-                    </div>
+                        </button>
 
-                    <!-- Rodapé do Mapa com Links para Google Maps e Waze -->
-                    <div class="bg-zinc-950/95 border-t border-rose-500/30 p-4 flex flex-wrap items-center justify-between gap-3 z-20">
-                        <div class="flex items-center gap-2 text-xs sm:text-sm font-rajdhani text-slate-300">
-                            <i class="ph-fill ph-navigation-arrow text-rose-500 text-lg"></i>
-                            <span>Coordenadas: <strong class="text-white">-21.1764, -47.8321</strong> (R. Elpídio Gomes, 338)</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <a href="https://waze.com/ul?q=Rua%20Elpidio%20Gomes%20338%20Ribeirao%20Preto" target="_blank" rel="noopener noreferrer"
-                               class="px-3.5 py-2 rounded bg-zinc-800 hover:bg-zinc-700 border border-cyan-500/40 text-cyan-300 font-orbitron font-bold text-xs uppercase tracking-wider transition flex items-center gap-1.5">
-                                <i class="ph-fill ph-car"></i>
-                                <span>Ir com Waze</span>
-                            </a>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Elpidio+Gomes+338+Ribeirao+Preto+SP" target="_blank" rel="noopener noreferrer"
-                               class="px-4 py-2 rounded bg-rose-600 hover:bg-rose-500 text-white font-orbitron font-bold text-xs uppercase tracking-wider transition flex items-center gap-1.5">
-                                <span>Abrir no Google Maps</span>
-                                <i class="ph-bold ph-arrow-square-out"></i>
-                            </a>
-                        </div>
+                        <button type="button" onclick="sendTacticalOrder('daniel')"
+                                class="clip-tactical-btn bg-rose-600 hover:bg-rose-500 text-white p-4 font-orbitron font-bold text-xs uppercase tracking-wider shadow-[0_0_25px_rgba(225,29,72,0.35)] hover:shadow-[0_0_35px_rgba(225,29,72,0.7)] transition flex items-center justify-center gap-3">
+                            <i class="ph-fill ph-whatsapp-logo text-2xl text-white"></i>
+                            <div class="text-left leading-tight">
+                                <span class="block text-[10px] text-rose-200 font-rajdhani font-semibold">TRIAGEM & MANUTENÇÃO</span>
+                                <span class="text-sm">Enviar para Daniel</span>
+                            </div>
+                        </button>
                     </div>
+                    <p class="text-center text-xs text-slate-400 font-rajdhani tracking-wider">
+                        🔒 Seus dados e a configuração da arma são transmitidos exclusivamente de forma criptografada para o armeiro responsável.
+                    </p>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- RODAPÉ OFICIAL -->
-    <footer class="bg-black border-t border-rose-600/30 py-10 relative z-10">
-        <div class="w-full max-w-[1680px] mx-auto px-4 sm:px-6 xl:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-zinc-900 border border-rose-500 flex items-center justify-center">
-                    <i class="ph-fill ph-skull text-lg text-rose-500"></i>
-                </div>
+    <!-- SEÇÃO CONTATO & BASE OPERACIONAL EM RIBEIRÃO PRETO (LARGURA TOTAL E MAPA REAL) -->
+    <section id="contato" class="py-24 bg-carbon bg-tactical-grid border-t border-rose-500/25 relative z-10">
+        <div class="w-full max-w-[1680px] mx-auto px-4 sm:px-6 xl:px-10">
+            
+            <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <span class="font-orbitron font-bold text-white text-base tracking-wider">DR. DAS ARMAS</span>
-                    <span class="block text-xs text-slate-500 font-rajdhani uppercase tracking-widest">Oficina de Armas • Credenciada Polícia Federal</span>
+                    <span class="font-rajdhani font-bold text-rose-500 tracking-[0.3em] uppercase text-sm block mb-1">
+                        // INSTALAÇÕES OFICIAIS & ATENDIMENTO
+                    </span>
+                    <h2 class="font-orbitron font-black text-3xl sm:text-5xl uppercase text-white">
+                        BASE OPERACIONAL & <span class="text-rose-600 glow-red-text">RADAR GPS</span>
+                    </h2>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-rajdhani uppercase tracking-wider">
+                    <span class="px-3 py-1.5 rounded bg-zinc-900 border border-emerald-500/40 text-emerald-400 flex items-center gap-1.5 font-bold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        BANCADA ABERTA (SEG A SEX: 08H - 18H)
+                    </span>
+                    <span class="px-3 py-1.5 rounded bg-zinc-900 border border-amber-500/40 text-amber-400 flex items-center gap-1.5 font-bold">
+                        <i class="ph-fill ph-shield-check"></i>
+                        HOMOLOGADO PF
+                    </span>
                 </div>
             </div>
-            <p class="text-xs text-slate-500 font-rajdhani tracking-wider text-center sm:text-right">
-                © 2026 DR. DAS ARMAS — R. Elpídio Gomes 338, Ribeirão Preto - SP. Todos os serviços seguem a legislação vigente.
-            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Coluna Esquerda: Informações de Contato Direto (5 Colunas) -->
+                <div class="lg:col-span-5 clip-tactical bg-zinc-900/95 border-2 border-zinc-800 p-6 sm:p-8 flex flex-col justify-between shadow-2xl space-y-6">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                            <h3 class="font-orbitron font-bold text-xl text-white uppercase flex items-center gap-2">
+                                <i class="ph-bold ph-phone-call text-rose-500"></i>
+                                Canais Oficiais
+                            </h3>
+                            <span class="text-xs font-rajdhani text-slate-400 uppercase tracking-widest">Ribeirão Preto / SP</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Card Renato Capel -->
+                            <div class="p-4 rounded-xl bg-black/60 border border-white/10 hover:border-emerald-500/50 transition-all duration-200 group">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-lg bg-emerald-500/20 border border-emerald-500/60 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                                        <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="font-rajdhani text-xs uppercase tracking-widest text-slate-400 block font-semibold">Armeiro & Especialista Técnico</span>
+                                        <h4 class="font-orbitron font-black text-lg text-white group-hover:text-emerald-400 transition">Renato Capel</h4>
+                                        <div class="flex flex-wrap items-center gap-3 mt-1.5">
+                                            <a href="https://wa.me/5516991137690?text=Ol%C3%A1%20Renato%20Capel%2C%20vim%20pelo%20site%20Dr.%20das%20Armas!" target="_blank" rel="noopener noreferrer"
+                                               class="text-emerald-400 hover:text-emerald-300 font-rajdhani font-bold text-base flex items-center gap-1">
+                                                (16) 99113-7690
+                                                <i class="ph-bold ph-arrow-up-right text-xs"></i>
+                                            </a>
+                                            <button onclick="copyText('(16) 99113-7690', 'Telefone do Renato Capel copiado com sucesso!')"
+                                                    class="text-xs text-slate-400 hover:text-white uppercase font-rajdhani font-bold flex items-center gap-1 bg-zinc-800 px-2 py-0.5 rounded border border-white/5 hover:border-zinc-500 transition">
+                                                <i class="ph-bold ph-copy"></i> Copiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Daniel -->
+                            <div class="p-4 rounded-xl bg-black/60 border border-white/10 hover:border-rose-500/50 transition-all duration-200 group">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-lg bg-rose-500/20 border border-rose-500/60 flex items-center justify-center text-rose-500 shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(225,29,72,0.3)]">
+                                        <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="font-rajdhani text-xs uppercase tracking-widest text-slate-400 block font-semibold">Atendimento & Triagem</span>
+                                        <h4 class="font-orbitron font-black text-lg text-white group-hover:text-rose-400 transition">Daniel</h4>
+                                        <div class="flex flex-wrap items-center gap-3 mt-1.5">
+                                            <a href="https://wa.me/5516991364721?text=Ol%C3%A1%20Daniel%2C%20vim%20pelo%20site%20Dr.%20das%20Armas!" target="_blank" rel="noopener noreferrer"
+                                               class="text-rose-400 hover:text-rose-300 font-rajdhani font-bold text-base flex items-center gap-1">
+                                                (16) 99136-4721
+                                                <i class="ph-bold ph-arrow-up-right text-xs"></i>
+                                            </a>
+                                            <button onclick="copyText('(16) 99136-4721', 'Telefone do Daniel copiado com sucesso!')"
+                                                    class="text-xs text-slate-400 hover:text-white uppercase font-rajdhani font-bold flex items-center gap-1 bg-zinc-800 px-2 py-0.5 rounded border border-white/5 hover:border-zinc-500 transition">
+                                                <i class="ph-bold ph-copy"></i> Copiar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Endereço Oficial -->
+                            <div class="p-4 rounded-xl bg-black/60 border border-white/10 hover:border-amber-500/50 transition-all duration-200 group">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 rounded-lg bg-amber-500/20 border border-amber-500/60 flex items-center justify-center text-amber-400 shrink-0 group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+                                        <i class="ph-fill ph-map-pin text-2xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="font-rajdhani text-xs uppercase tracking-widest text-slate-400 block font-semibold">Oficina Credenciada Polícia Federal</span>
+                                        <h4 class="font-orbitron font-black text-base text-white">Rua Elpídio Gomes, 338</h4>
+                                        <p class="text-slate-300 text-sm mt-0.5">Ribeirão Preto - SP</p>
+                                        <div class="flex flex-wrap items-center gap-2 mt-2">
+                                            <button onclick="copyText('Rua Elpídio Gomes 338, Ribeirão Preto - SP', 'Endereço copiado para a área de transferência!')"
+                                                    class="text-xs text-amber-400 hover:text-amber-300 uppercase font-rajdhani font-bold flex items-center gap-1 bg-zinc-800 px-2.5 py-1 rounded border border-white/5 hover:border-amber-500/50 transition">
+                                                <i class="ph-bold ph-copy"></i> Copiar Endereço
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 font-rajdhani">
+                        <span class="flex items-center gap-1.5"><i class="ph-fill ph-seal-check text-rose-500 text-base"></i> ATENDIMENTO TÉCNICO AGENDADO</span>
+                        <span class="text-amber-400 font-bold uppercase tracking-wider">CUSTÓDIA SEGURA & REGISTRADA</span>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita: Mapa Tático Real 100% Funcional (7 Colunas) -->
+                <div class="lg:col-span-7 clip-tactical border-2 border-rose-500/40 bg-zinc-950 relative overflow-hidden min-h-[500px] flex flex-col shadow-[0_0_50px_rgba(225,29,72,0.2)]">
+                    
+                    <!-- Barra de Controle do HUD do Mapa -->
+                    <div class="bg-zinc-900/98 border-b border-rose-500/30 px-4 py-3 flex flex-wrap items-center justify-between gap-3 z-20">
+                        <div class="flex items-center gap-2 font-orbitron text-xs text-rose-400 font-bold">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+                            <span>GPS ALVO // RUA ELPÍDIO GOMES, 338 — RIBEIRÃO PRETO</span>
+                        </div>
+                        
+                        <!-- Seletor de Camada do Mapa Real (Tático, Satélite Real ou Ruas) -->
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <button onclick="setMapLayer('tactical')" id="layer-tactical" class="px-2.5 py-1 rounded bg-rose-600 text-white text-xs font-rajdhani font-bold uppercase tracking-wider transition">
+                                Tático
+                            </button>
+                            <button onclick="setMapLayer('satellite')" id="layer-satellite" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-slate-300 text-xs font-rajdhani font-bold uppercase tracking-wider transition">
+                                Satélite Real
+                            </button>
+                            <button onclick="setMapLayer('street')" id="layer-street" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-slate-300 text-xs font-rajdhani font-bold uppercase tracking-wider transition">
+                                Ruas
+                            </button>
+                            <button onclick="recenterMap()" title="Recentralizar Alvo" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-rose-600 text-xs font-rajdhani font-bold text-white uppercase tracking-wider transition flex items-center gap-1">
+                                <i class="ph-bold ph-crosshair"></i> Alvo
+                            </button>
+                            <button onclick="toggleRadarOverlay()" id="radar-btn" class="px-2.5 py-1 rounded bg-rose-600/20 border border-rose-500/50 text-xs font-rajdhani font-bold text-rose-300 uppercase tracking-wider transition">
+                                Radar: ON
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Container do Mapa Leaflet + Overlay de Radar -->
+                    <div class="relative flex-1 min-h-[420px] w-full bg-[#070709]">
+                        <div id="tactical-map" class="absolute inset-0 z-10 w-full h-full"></div>
+
+                        <!-- Overlay de Varredura de Radar Militar Tático -->
+                        <div id="radar-overlay" class="absolute inset-0 z-20 pointer-events-none flex items-center justify-center overflow-hidden">
+                            <div class="w-[520px] h-[520px] rounded-full border border-rose-500/20 flex items-center justify-center relative">
+                                <div class="w-[360px] h-[360px] rounded-full border border-rose-500/20"></div>
+                                <div class="w-[180px] h-[180px] rounded-full border border-rose-500/25"></div>
+                                <div class="absolute inset-0 rounded-full radar-cone"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Barra Inferior do Mapa com Ações de Rotas e Navegação -->
+                    <div class="bg-zinc-950/98 border-t border-rose-500/30 p-4 flex flex-wrap items-center justify-between gap-4 z-20">
+                        <div class="flex items-center gap-2 text-xs sm:text-sm font-rajdhani text-slate-300">
+                            <i class="ph-fill ph-navigation-arrow text-rose-500 text-xl animate-pulse"></i>
+                            <span>Coordenadas GPS: <strong class="text-white font-mono">-21.1824, -47.8210</strong> (Ribeirão Preto - SP)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <a href="https://waze.com/ul?q=Rua%20Elpidio%20Gomes%20338%20Ribeirao%20Preto" target="_blank" rel="noopener noreferrer"
+                               class="px-4 py-2.5 rounded bg-zinc-900 hover:bg-cyan-950/70 border border-cyan-500/50 text-cyan-300 font-orbitron font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
+                                <i class="ph-fill ph-car text-base"></i>
+                                <span>Traçar com Waze</span>
+                            </a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Elpidio+Gomes+338+Ribeirao+Preto+SP" target="_blank" rel="noopener noreferrer"
+                               class="px-4 py-2.5 rounded bg-rose-600 hover:bg-rose-500 text-white font-orbitron font-bold text-xs uppercase tracking-wider transition flex items-center gap-2 shadow-[0_0_20px_rgba(225,29,72,0.4)]">
+                                <span>Abrir no Google Maps</span>
+                                <i class="ph-bold ph-arrow-square-out text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER TÁTICO COMPLETO & PROFISSIONAL -->
+    <footer class="bg-[#050608] border-t-2 border-rose-600/30 pt-16 pb-10 relative z-10 overflow-hidden">
+        <!-- Detalhes de Fundo HUD -->
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-rose-500 to-transparent"></div>
+        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[200px] bg-rose-600/10 blur-[120px] pointer-events-none"></div>
+
+        <div class="w-full max-w-[1680px] mx-auto px-4 sm:px-6 xl:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
+                
+                <!-- Coluna 1: Brasão & Institucional (4 colunas) -->
+                <div class="lg:col-span-4 space-y-4">
+                    <a href="#" class="flex items-center gap-3 group">
+                        <div class="relative w-12 h-12 flex items-center justify-center shrink-0">
+                            <svg class="w-full h-full text-rose-600 animate-gear-slow absolute inset-0" viewBox="0 0 100 100" fill="none">
+                                <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="5" stroke-dasharray="10 6"/>
+                                <circle cx="50" cy="50" r="32" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.6"/>
+                            </svg>
+                            <div class="w-9 h-9 rounded-full bg-zinc-950 border border-rose-500 flex items-center justify-center shadow-[0_0_15px_rgba(225,29,72,0.6)]">
+                                <i class="ph-fill ph-skull text-xl text-white group-hover:text-rose-500 transition"></i>
+                            </div>
+                        </div>
+                        <div class="leading-none">
+                            <span class="font-orbitron font-black text-2xl tracking-wider text-white block">
+                                DR. DAS <span class="text-rose-600 glow-red-text">ARMAS</span>
+                            </span>
+                            <span class="font-rajdhani text-xs tracking-[0.25em] text-slate-400 uppercase block mt-1">
+                                Oficina de Armas Credenciada PF
+                            </span>
+                        </div>
+                    </a>
+
+                    <p class="text-slate-400 text-sm leading-relaxed font-sans pr-4">
+                        Centro especializado de alta precisão em manutenção preventiva, restauração mecânica e customização tática de armamentos em Ribeirão Preto e região. Excelência técnica e segurança jurídica absoluta.
+                    </p>
+
+                    <div class="flex items-center gap-3 pt-2">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 font-rajdhani text-xs font-bold tracking-wider uppercase">
+                            <i class="ph-fill ph-shield-star text-base"></i>
+                            <span>Credenciamento Oficial Polícia Federal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Acesso Rápido (2 colunas) -->
+                <div class="lg:col-span-2 space-y-4">
+                    <h4 class="font-orbitron font-bold text-sm uppercase text-white tracking-wider flex items-center gap-1.5">
+                        <span class="w-1.5 h-3.5 bg-rose-600 rounded-sm"></span> Navegação
+                    </h4>
+                    <ul class="space-y-2.5 font-rajdhani font-semibold text-sm tracking-wider uppercase">
+                        <li><a href="#servicos" class="text-slate-400 hover:text-rose-400 transition flex items-center gap-2"><i class="ph-bold ph-caret-right text-rose-600 text-xs"></i> Serviços Oficiais</a></li>
+                        <li><a href="#customizacao" class="text-slate-400 hover:text-rose-400 transition flex items-center gap-2"><i class="ph-bold ph-caret-right text-rose-600 text-xs"></i> Antes & Depois</a></li>
+                        <li><a href="#blueprint" class="text-slate-400 hover:text-cyan-400 transition flex items-center gap-2"><i class="ph-bold ph-caret-right text-cyan-500 text-xs"></i> Raio-X Técnico CAD</a></li>
+                        <li><a href="#credenciamento" class="text-slate-400 hover:text-amber-400 transition flex items-center gap-2"><i class="ph-bold ph-caret-right text-amber-500 text-xs"></i> Credenciamento PF</a></li>
+                        <li><a href="#simulador" class="text-slate-400 hover:text-rose-400 transition flex items-center gap-2"><i class="ph-bold ph-caret-right text-rose-600 text-xs"></i> Orçamento Online</a></li>
+                        <li><a href="#contato" class="text-slate-400 hover:text-rose-400 transition flex items-center gap-2"><i class="ph-bold ph-caret-right text-rose-600 text-xs"></i> Localização & GPS</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Atendimento Direto e Especialistas (3 colunas) -->
+                <div class="lg:col-span-3 space-y-4">
+                    <h4 class="font-orbitron font-bold text-sm uppercase text-white tracking-wider flex items-center gap-1.5">
+                        <span class="w-1.5 h-3.5 bg-rose-600 rounded-sm"></span> Atendimento Direto
+                    </h4>
+                    
+                    <div class="space-y-3 font-rajdhani">
+                        <!-- Renato Capel -->
+                        <div class="p-3 rounded-lg bg-zinc-950 border border-white/5 hover:border-emerald-500/40 transition">
+                            <span class="text-[10px] uppercase text-emerald-400 font-bold tracking-widest block">Armeiro Responsável</span>
+                            <span class="text-white font-orbitron font-bold text-sm block">Renato Capel</span>
+                            <a href="https://wa.me/5516991137690?text=Ol%C3%A1%20Renato%2C%20vim%20pelo%20site%20Dr.%20das%20Armas!" target="_blank" rel="noopener noreferrer"
+                               class="text-emerald-400 hover:text-emerald-300 font-bold text-sm flex items-center gap-1.5 mt-0.5">
+                                <i class="ph-fill ph-whatsapp-logo text-base"></i> (16) 99113-7690
+                            </a>
+                        </div>
+
+                        <!-- Daniel -->
+                        <div class="p-3 rounded-lg bg-zinc-950 border border-white/5 hover:border-rose-500/40 transition">
+                            <span class="text-[10px] uppercase text-rose-400 font-bold tracking-widest block">Triagem & Atendimento</span>
+                            <span class="text-white font-orbitron font-bold text-sm block">Daniel</span>
+                            <a href="https://wa.me/5516991364721?text=Ol%C3%A1%20Daniel%2C%20vim%20pelo%20site%20Dr.%20das%20Armas!" target="_blank" rel="noopener noreferrer"
+                               class="text-rose-400 hover:text-rose-300 font-bold text-sm flex items-center gap-1.5 mt-0.5">
+                                <i class="ph-fill ph-whatsapp-logo text-base"></i> (16) 99136-4721
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna 4: Localização Física & Horários (3 colunas) -->
+                <div class="lg:col-span-3 space-y-4">
+                    <h4 class="font-orbitron font-bold text-sm uppercase text-white tracking-wider flex items-center gap-1.5">
+                        <span class="w-1.5 h-3.5 bg-rose-600 rounded-sm"></span> Base Operacional
+                    </h4>
+                    
+                    <div class="space-y-2.5 font-rajdhani text-sm text-slate-300">
+                        <p class="flex items-start gap-2">
+                            <i class="ph-fill ph-map-pin text-rose-500 text-lg shrink-0 mt-0.5"></i>
+                            <span>Rua Elpídio Gomes, 338<br><span class="text-slate-400">Ribeirão Preto - SP</span></span>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <i class="ph-fill ph-clock text-amber-400 text-base shrink-0"></i>
+                            <span>Segunda a Sexta: <strong>08:00 às 18:00</strong></span>
+                        </p>
+                        <p class="flex items-center gap-2 text-xs text-emerald-400">
+                            <i class="ph-fill ph-calendar-check text-base shrink-0"></i>
+                            <span>Atendimento presencial mediante agendamento prévio</span>
+                        </p>
+                    </div>
+
+                    <div class="pt-2">
+                        <a href="https://wa.me/5516991137690?text=Ol%C3%A1%20Renato%2C%20gostaria%20de%20agendar%20uma%20visita%20na%20oficina!" target="_blank" rel="noopener noreferrer"
+                           class="w-full py-2.5 px-4 rounded bg-rose-600/20 hover:bg-rose-600 border border-rose-500 text-white font-orbitron font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2">
+                            <i class="ph-bold ph-calendar-plus text-base"></i>
+                            <span>Agendar Atendimento</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Faixa Inferior de Direitos e Botão Voltar ao Topo -->
+            <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-rajdhani tracking-wider text-slate-500">
+                <div class="text-center md:text-left space-y-1">
+                    <p>© 2026 DR. DAS ARMAS — Todos os direitos reservados. Oficina credenciada pela Polícia Federal.</p>
+                    <p class="text-[11px] text-slate-600">O transporte de armas de fogo deve sempre estar acompanhado de Guia de Tráfego e documentação válida segundo a legislação vigente.</p>
+                </div>
+                
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); playMetallicClick(1500, 0.05);"
+                        class="px-4 py-2 rounded-lg bg-zinc-900 border border-white/10 hover:border-rose-500 text-slate-300 hover:text-white uppercase font-orbitron font-bold text-xs flex items-center gap-2 transition group">
+                    <span>Voltar ao Topo</span>
+                    <i class="ph-bold ph-arrow-up text-rose-500 group-hover:-translate-y-1 transition-transform"></i>
+                </button>
+            </div>
         </div>
     </footer>
 
@@ -1296,18 +1552,80 @@
             }
         });
 
-        // Slider Comparador Antes & Depois (Customização)
+        // Slider Comparador Antes & Depois (Interativo: Arraste com Mouse, Touch e Range)
         function updateComparison(val) {
             const beforeDiv = document.getElementById('compare-before');
             const line = document.getElementById('compare-line');
             const container = document.getElementById('compare-container');
             const inner = document.getElementById('compare-before-inner');
-            if (beforeDiv && line && container && inner) {
-                beforeDiv.style.width = `${val}%`;
-                line.style.left = `${val}%`;
-                inner.style.width = `${container.offsetWidth}px`;
+            if (beforeDiv && line && container) {
+                const clamped = Math.max(2, Math.min(98, parseFloat(val)));
+                beforeDiv.style.width = `${clamped}%`;
+                line.style.left = `${clamped}%`;
+                if (inner) {
+                    inner.style.width = `${container.clientWidth}px`;
+                }
             }
         }
+
+        function initCompareSlider() {
+            const container = document.getElementById('compare-container');
+            const slider = document.getElementById('compare-slider');
+            if (!container) return;
+
+            let isDragging = false;
+
+            function updateFromPointer(clientX) {
+                const rect = container.getBoundingClientRect();
+                if (rect.width <= 0) return;
+                const offsetX = clientX - rect.left;
+                let pct = (offsetX / rect.width) * 100;
+                pct = Math.max(3, Math.min(97, pct));
+                updateComparison(pct);
+                if (slider) slider.value = pct;
+            }
+
+            container.addEventListener('pointerdown', (e) => {
+                isDragging = true;
+                container.setPointerCapture(e.pointerId);
+                updateFromPointer(e.clientX);
+                playMetallicClick(800, 0.02);
+            });
+
+            container.addEventListener('pointermove', (e) => {
+                if (isDragging) {
+                    updateFromPointer(e.clientX);
+                }
+            });
+
+            const stopDrag = (e) => {
+                if (isDragging) {
+                    isDragging = false;
+                    try { container.releasePointerCapture(e.pointerId); } catch(err) {}
+                    playMetallicClick(900, 0.02);
+                }
+            };
+
+            container.addEventListener('pointerup', stopDrag);
+            container.addEventListener('pointercancel', stopDrag);
+
+            // Suporte touch nativo complementar
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches && e.touches[0]) {
+                    isDragging = true;
+                    updateFromPointer(e.touches[0].clientX);
+                }
+            }, { passive: true });
+
+            container.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches && e.touches[0]) {
+                    updateFromPointer(e.touches[0].clientX);
+                }
+            }, { passive: true });
+
+            container.addEventListener('touchend', () => { isDragging = false; });
+        }
+
         window.addEventListener('resize', () => {
             const slider = document.getElementById('compare-slider');
             if (slider) updateComparison(slider.value);
@@ -1562,9 +1880,11 @@
             requestAnimationFrame(animateParticles);
         }
 
-        // 7. Mapa Tático Interativo Real (Leaflet + CartoDB Dark Matter) em Ribeirão Preto
+        // 7. Mapa Tático Real 100% Funcional (OpenStreetMap Dark + Satélite Real de Alta Resolução Esri)
         let tacticalMap = null;
-        const officeCoords = [-21.1764, -47.8321]; // Região da Rua Elpídio Gomes, 338 - Ribeirão Preto/SP
+        let currentTileLayer = null;
+        let mapLayers = {};
+        const officeCoords = [-21.1824, -47.8210]; // Rua Elpídio Gomes, 338 - Ribeirão Preto / SP
 
         function initTacticalMap() {
             const mapEl = document.getElementById('tactical-map');
@@ -1573,39 +1893,87 @@
             tacticalMap = L.map('tactical-map', {
                 center: officeCoords,
                 zoom: 16,
-                scrollWheelZoom: false
+                scrollWheelZoom: false,
+                zoomControl: true
             });
 
-            // Tiles Escuros Táticos (CartoDB Dark Matter - Sem necessidade de API Key)
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap &copy; CARTO',
-                subdomains: 'abcd',
-                maxZoom: 20
-            }).addTo(tacticalMap);
+            // 1. Camada Tática Noturna (OpenStreetMap + Filtro Militar Especial - 100% livre de API Key)
+            mapLayers.tactical = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                className: 'leaflet-tile-tactical',
+                maxZoom: 19,
+                subdomains: ['a', 'b', 'c']
+            });
 
-            // Marcador Pulsante Customizado
+            // 2. Camada Satélite Real (Fotos Aéreas de Alta Definição Esri World Imagery)
+            mapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: '&copy; Esri &mdash; Maxar, Earthstar Geographics',
+                maxZoom: 19
+            });
+
+            // 3. Camada de Ruas Padrão
+            mapLayers.street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                maxZoom: 19,
+                subdomains: ['a', 'b', 'c']
+            });
+
+            // Inicia com a camada tática militar
+            currentTileLayer = mapLayers.tactical.addTo(tacticalMap);
+
+            // Marcador Tático Customizado
             const tacticalIcon = L.divIcon({
                 className: 'custom-tactical-pin',
                 html: `
-                    <div style="position:relative;width:36px;height:36px;display:flex;align-items:center;justify-content:center;">
-                        <span style="position:absolute;inset:0;border-radius:9999px;background:rgba(225,29,72,0.5);animation:hotspotPulse 1.6s infinite;"></span>
-                        <div style="position:relative;width:28px;height:28px;border-radius:9999px;background:#e11d48;border:2px solid #fff;box-shadow:0 0 15px #ff0033;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:14px;">
+                    <div style="position:relative;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                        <span style="position:absolute;inset:0;border-radius:9999px;background:rgba(225,29,72,0.45);animation:hotspotPulse 1.6s infinite;"></span>
+                        <div style="position:relative;width:30px;height:30px;border-radius:9999px;background:#e11d48;border:2.5px solid #fff;box-shadow:0 0 20px #ff0033;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:16px;">
                             ⌖
                         </div>
                     </div>
                 `,
-                iconSize: [36, 36],
-                iconAnchor: [18, 18]
+                iconSize: [40, 40],
+                iconAnchor: [20, 20]
             });
 
             const marker = L.marker(officeCoords, { icon: tacticalIcon }).addTo(tacticalMap);
             marker.bindPopup(`
-                <div style="padding:4px 2px;text-align:center;">
-                    <strong style="font-family:Orbitron,sans-serif;color:#fb7185;font-size:13px;display:block;">DR. DAS ARMAS</strong>
-                    <span style="font-size:12px;color:#e2e8f0;">R. Elpídio Gomes, 338 — Ribeirão Preto/SP</span><br>
-                    <span style="font-size:11px;color:#fbbf24;font-weight:bold;">Credenciado Polícia Federal</span>
+                <div style="padding:6px 4px;text-align:center;font-family:Rajdhani,sans-serif;">
+                    <strong style="font-family:Orbitron,sans-serif;color:#fb7185;font-size:14px;display:block;letter-spacing:1px;">DR. DAS ARMAS</strong>
+                    <span style="font-size:13px;color:#f1f5f9;display:block;margin:3px 0;">Rua Elpídio Gomes, 338 — Ribeirão Preto / SP</span>
+                    <span style="font-size:11px;color:#fbbf24;font-weight:bold;text-transform:uppercase;letter-spacing:1px;display:inline-block;padding:2px 6px;background:rgba(245,158,11,0.15);border-radius:4px;border:1px solid rgba(245,158,11,0.3);">
+                        Credenciamento Polícia Federal
+                    </span>
+                    <div style="margin-top:8px;">
+                        <a href="https://wa.me/5516991137690?text=Ol%C3%A1%20Renato%2C%20estou%20indo%20na%20oficina!" target="_blank"
+                           style="display:inline-block;background:#e11d48;color:#fff;font-size:11px;font-weight:bold;padding:4px 10px;border-radius:4px;text-decoration:none;">
+                            Avisar Chegada no WhatsApp
+                        </a>
+                    </div>
                 </div>
             `).openPopup();
+        }
+
+        // Alternância entre Visão Tática, Satélite Real e Ruas
+        function setMapLayer(type) {
+            playMetallicClick(1100, 0.04);
+            if (!tacticalMap || !mapLayers[type]) return;
+
+            if (currentTileLayer) {
+                tacticalMap.removeLayer(currentTileLayer);
+            }
+            currentTileLayer = mapLayers[type].addTo(tacticalMap);
+
+            // Atualiza botões visuais
+            ['tactical', 'satellite', 'street'].forEach(key => {
+                const btn = document.getElementById(`layer-${key}`);
+                if (!btn) return;
+                if (key === type) {
+                    btn.className = "px-2.5 py-1 rounded bg-rose-600 text-white text-xs font-rajdhani font-bold uppercase tracking-wider transition shadow-[0_0_10px_rgba(225,29,72,0.5)]";
+                } else {
+                    btn.className = "px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-slate-300 text-xs font-rajdhani font-bold uppercase tracking-wider transition";
+                }
+            });
         }
 
         function recenterMap() {
@@ -1619,23 +1987,27 @@
             playMetallicClick(1000, 0.04);
             const overlay = document.getElementById('radar-overlay');
             const btn = document.getElementById('radar-btn');
+            if (!overlay || !btn) return;
             if (overlay.classList.contains('hidden')) {
                 overlay.classList.remove('hidden');
-                btn.textContent = 'Radar HUD: ON';
+                btn.textContent = 'Radar: ON';
+                btn.classList.add('bg-rose-600/20', 'border-rose-500/50', 'text-rose-300');
             } else {
                 overlay.classList.add('hidden');
-                btn.textContent = 'Radar HUD: OFF';
+                btn.textContent = 'Radar: OFF';
+                btn.classList.remove('bg-rose-600/20', 'border-rose-500/50', 'text-rose-300');
             }
         }
 
         window.addEventListener('resize', resizeCanvas);
-        window.onload = function () {
+        window.addEventListener('load', function () {
             initParticles();
             animateParticles();
             initTacticalMap();
+            initCompareSlider();
             const slider = document.getElementById('compare-slider');
             if (slider) updateComparison(slider.value);
-        };
+        });
     </script>
 </body>
 </html>
