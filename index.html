@@ -268,9 +268,144 @@
             user-select: none;
             -webkit-user-select: none;
         }
+
+        /* Efeitos Cinematográficos de Disparo Balístico (Intro Shot) */
+        @keyframes gunshotShake {
+            0% { transform: translate(0, 0) scale(1); }
+            10% { transform: translate(-14px, 12px) rotate(-2deg) scale(1.03); }
+            25% { transform: translate(16px, -14px) rotate(2deg) scale(1.02); }
+            40% { transform: translate(-10px, 8px) rotate(-1.2deg); }
+            55% { transform: translate(8px, -6px) rotate(0.8deg); }
+            70% { transform: translate(-4px, 4px) rotate(-0.4deg); }
+            85% { transform: translate(2px, -2px); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .animate-gunshot-shake {
+            animation: gunshotShake 0.55s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+        }
+
+        @keyframes bulletImpactRing {
+            0% { transform: scale(0.2); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.8; }
+            100% { transform: scale(2.2); opacity: 0; }
+        }
+        .animate-impact-shockwave {
+            animation: bulletImpactRing 0.6s ease-out forwards;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-rose-600 selection:text-white">
+
+    <!-- INTRO TÁTICA CINEMATOGRÁFICA: DISPARO BALÍSTICO NA TELA -->
+    <div id="intro-tactical-screen" class="fixed inset-0 z-[99999] bg-[#050608] flex items-center justify-center overflow-hidden transition-all duration-700 select-none cursor-pointer">
+        <!-- Grade Militar de Fundo -->
+        <div class="absolute inset-0 bg-tactical-grid opacity-35 pointer-events-none"></div>
+
+        <!-- Clarão Cegante de Disparo (Muzzle Flash) -->
+        <div id="intro-muzzle-flash" class="absolute inset-0 bg-gradient-to-r from-amber-100 via-white to-rose-200 opacity-0 pointer-events-none z-30 transition-opacity duration-75"></div>
+
+        <!-- Onda de Choque Circular Balística -->
+        <div id="intro-shockwave" class="absolute w-40 h-40 rounded-full border-4 border-rose-500/80 pointer-events-none z-20 opacity-0 scale-50"></div>
+
+        <!-- SVG do Buraco de Bala Hiper-realista e Vidro Estilhaçado Radial -->
+        <div id="intro-bullet-impact" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center opacity-0 scale-75 transition-all duration-300">
+            <svg viewBox="0 0 1000 1000" class="w-full h-full max-w-[1400px] max-h-[1400px] drop-shadow-[0_0_30px_rgba(255,0,51,0.9)]">
+                <!-- Anel de Fumaça e Queima Térmica -->
+                <circle cx="500" cy="500" r="160" fill="radial-gradient(circle, rgba(225,29,72,0.4) 0%, rgba(0,0,0,0.8) 60%, transparent 100%)" opacity="0.6"/>
+                <circle cx="500" cy="500" r="75" fill="#000000" stroke="#ff0033" stroke-width="3" opacity="0.9"/>
+                
+                <!-- Fissuras Radiais Longas (Vidro Trincado de Alto Impacto) -->
+                <!-- Fissura 1: Topo Esquerda -->
+                <path d="M 500 500 L 460 380 L 410 320 L 320 220 L 250 120 L 180 30" stroke="#f1f5f9" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+                <path d="M 460 380 L 490 310 L 450 200 L 420 80" stroke="#94a3b8" stroke-width="2" fill="none" opacity="0.8"/>
+                <path d="M 410 320 L 340 330 L 230 280 L 110 260" stroke="#cbd5e1" stroke-width="2.5" fill="none" opacity="0.85"/>
+
+                <!-- Fissura 2: Topo Direita -->
+                <path d="M 500 500 L 570 390 L 650 300 L 760 190 L 880 110 L 980 40" stroke="#f1f5f9" stroke-width="3.2" stroke-linecap="round" fill="none" opacity="0.9"/>
+                <path d="M 570 390 L 610 340 L 710 310 L 850 260 L 970 230" stroke="#94a3b8" stroke-width="2" fill="none" opacity="0.8"/>
+                <path d="M 650 300 L 690 200 L 730 90 L 750 0" stroke="#cbd5e1" stroke-width="2.2" fill="none" opacity="0.85"/>
+
+                <!-- Fissura 3: Baixo Direita -->
+                <path d="M 500 500 L 580 570 L 680 660 L 790 770 L 890 890 L 970 980" stroke="#f1f5f9" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+                <path d="M 580 570 L 670 560 L 790 590 L 920 570 L 1000 560" stroke="#cbd5e1" stroke-width="2" fill="none" opacity="0.8"/>
+                <path d="M 680 660 L 650 760 L 680 870 L 670 990" stroke="#94a3b8" stroke-width="2.5" fill="none" opacity="0.8"/>
+
+                <!-- Fissura 4: Baixo Esquerda -->
+                <path d="M 500 500 L 430 580 L 330 670 L 220 780 L 130 890 L 40 980" stroke="#f1f5f9" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+                <path d="M 430 580 L 340 590 L 220 620 L 80 640 L 0 650" stroke="#cbd5e1" stroke-width="2" fill="none" opacity="0.8"/>
+                <path d="M 330 670 L 370 780 L 350 890 L 330 1000" stroke="#94a3b8" stroke-width="2.5" fill="none" opacity="0.85"/>
+
+                <!-- Círculos de Fratura Concêntrica do Vidro -->
+                <path d="M 430 450 Q 500 420 570 450 Q 600 510 570 570 Q 500 600 430 570 Q 400 510 430 450 Z" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.75" stroke-dasharray="8 4"/>
+                <path d="M 370 400 Q 500 340 630 400 Q 680 500 630 620 Q 500 680 370 620 Q 320 500 370 400 Z" stroke="#94a3b8" stroke-width="1.8" fill="none" opacity="0.6" stroke-dasharray="14 6"/>
+                <path d="M 300 330 Q 500 240 700 330 Q 770 500 700 690 Q 500 770 300 690 Q 230 500 300 330 Z" stroke="#64748b" stroke-width="1.5" fill="none" opacity="0.45" stroke-dasharray="20 8"/>
+
+                <!-- Fragmentos de Vidro Iluminados (Shards) -->
+                <polygon points="460,420 480,410 470,440" fill="rgba(255,255,255,0.7)"/>
+                <polygon points="530,420 550,440 520,445" fill="rgba(255,255,255,0.6)"/>
+                <polygon points="540,540 560,560 525,550" fill="rgba(255,255,255,0.8)"/>
+                <polygon points="450,530 440,560 470,545" fill="rgba(255,255,255,0.7)"/>
+
+                <!-- O Buraco Central de Bala (Metal Rompido e Pólvora Negra) -->
+                <path d="M 500 468 L 515 480 L 532 475 L 530 495 L 545 505 L 528 518 L 532 535 L 512 528 L 500 542 L 485 528 L 468 535 L 472 516 L 455 505 L 472 492 L 468 475 L 488 480 Z" fill="#000000" stroke="#f59e0b" stroke-width="3"/>
+                <circle cx="500" cy="500" r="22" fill="#050505"/>
+                <!-- Brilho Incandescente Residual de Chumbo Quente -->
+                <circle cx="500" cy="500" r="14" fill="#ff0033" opacity="0.85" class="animate-pulse"/>
+            </svg>
+        </div>
+
+        <!-- HUD Central com Mira Tática Laser -->
+        <div id="intro-hud" class="relative z-10 flex flex-col items-center justify-center text-center p-6 transition-all duration-300">
+            <!-- Retículo Giratório Militar com Brasão Central -->
+            <div class="relative w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center mb-6">
+                <!-- Anel Externo Giratório -->
+                <svg class="absolute inset-0 w-full h-full text-rose-500/50 animate-gear-slow" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2" stroke-dasharray="14 8"/>
+                    <circle cx="50" cy="50" r="38" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6 4" stroke-opacity="0.7"/>
+                </svg>
+
+                <!-- Anel Interno Reverso -->
+                <svg class="absolute w-28 h-28 text-rose-600/70 animate-gear-reverse" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="3" stroke-dasharray="20 10"/>
+                </svg>
+
+                <!-- Mira Laser Cruzada -->
+                <div class="absolute w-full h-[1px] bg-rose-500/60 shadow-[0_0_8px_#ff0033]"></div>
+                <div class="absolute h-full w-[1px] bg-rose-500/60 shadow-[0_0_8px_#ff0033]"></div>
+
+                <!-- Ponto Vermelho Central Alinhado -->
+                <div id="intro-laser-dot" class="w-4 h-4 rounded-full bg-rose-600 border border-white shadow-[0_0_15px_#ff0033] flex items-center justify-center relative">
+                    <div class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></div>
+                </div>
+            </div>
+
+            <!-- Textos e Telemetria de Bloqueio -->
+            <div class="space-y-2 font-rajdhani">
+                <span id="intro-status" class="text-xs uppercase tracking-[0.35em] text-rose-500 font-bold block animate-pulse">
+                    // ADQUIRINDO ALVO BALÍSTICO...
+                </span>
+                <h1 class="font-orbitron font-black text-3xl sm:text-5xl text-white tracking-widest uppercase">
+                    DR. DAS <span class="text-rose-600 glow-red-text">ARMAS</span>
+                </h1>
+                <p class="text-xs font-rajdhani text-slate-400 tracking-[0.25em] uppercase">
+                    Oficina de Armas • Credenciada Polícia Federal
+                </p>
+                <div class="pt-4">
+                    <span id="intro-action-hint" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-600/20 border border-rose-500/40 text-rose-300 text-xs font-orbitron uppercase tracking-wider animate-bounce">
+                        <i class="ph-bold ph-crosshair text-rose-400 text-sm"></i>
+                        <span>Clique para disparar</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão Discreto no Topo Direito: Pular Intro -->
+        <button id="intro-skip-btn" onclick="skipIntro(event)" title="Pular animação e entrar direto no site"
+                class="absolute top-6 right-6 z-40 px-3.5 py-1.5 rounded-lg bg-zinc-900/90 border border-white/10 hover:border-rose-500 text-xs font-orbitron text-slate-400 hover:text-white uppercase tracking-wider transition flex items-center gap-1.5 shadow-lg">
+            <span>Pular Intro</span>
+            <i class="ph-bold ph-arrow-right"></i>
+        </button>
+    </div>
 
     <!-- Barra Laser de Progresso de Leitura no Topo -->
     <div class="fixed top-0 left-0 w-full h-[3px] z-[60] bg-zinc-900/80 pointer-events-none">
@@ -1999,6 +2134,164 @@
             }
         }
 
+        // 8. Sistema de Intro Cinematográfica: Disparo Balístico na Tela
+        let introShotFired = false;
+        let introAutoTimer = null;
+
+        function playGunshotSound() {
+            if (!sfxEnabled) return;
+            try {
+                initAudio();
+                const now = audioCtx.currentTime;
+
+                // 1. Estalo de Percussão Metálica / Espoleta
+                const clickOsc = audioCtx.createOscillator();
+                const clickGain = audioCtx.createGain();
+                clickOsc.type = 'triangle';
+                clickOsc.frequency.setValueAtTime(1600, now);
+                clickOsc.frequency.exponentialRampToValueAtTime(320, now + 0.03);
+                clickGain.gain.setValueAtTime(0.4, now);
+                clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+                clickOsc.connect(clickGain);
+                clickGain.connect(audioCtx.destination);
+                clickOsc.start(now);
+                clickOsc.stop(now + 0.04);
+
+                // 2. Ruído Branco Filtrado de Alto Volume (Explosão de Gás e Pólvora)
+                const bufferSize = Math.floor(audioCtx.sampleRate * 0.7);
+                const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.18));
+                }
+
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = noiseBuffer;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(2200, now);
+                filter.frequency.exponentialRampToValueAtTime(140, now + 0.65);
+
+                const noiseGain = audioCtx.createGain();
+                noiseGain.gain.setValueAtTime(0.9, now);
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.68);
+
+                noise.connect(filter);
+                filter.connect(noiseGain);
+                noiseGain.connect(audioCtx.destination);
+                noise.start(now);
+
+                // 3. Sub-Bass Punch (Onda de Choque Grave do Disparo)
+                const subOsc = audioCtx.createOscillator();
+                const subGain = audioCtx.createGain();
+                subOsc.type = 'sine';
+                subOsc.frequency.setValueAtTime(140, now);
+                subOsc.frequency.exponentialRampToValueAtTime(28, now + 0.5);
+
+                subGain.gain.setValueAtTime(0.8, now);
+                subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+
+                subOsc.connect(subGain);
+                subGain.connect(audioCtx.destination);
+                subOsc.start(now);
+                subOsc.stop(now + 0.58);
+            } catch (err) {
+                // Silencioso se bloqueado pelo browser
+            }
+        }
+
+        function triggerGunshot() {
+            if (introShotFired) return;
+            introShotFired = true;
+            if (introAutoTimer) clearTimeout(introAutoTimer);
+
+            const screen = document.getElementById('intro-tactical-screen');
+            const flash = document.getElementById('intro-muzzle-flash');
+            const impact = document.getElementById('intro-bullet-impact');
+            const shockwave = document.getElementById('intro-shockwave');
+            const hud = document.getElementById('intro-hud');
+            const statusText = document.getElementById('intro-status');
+
+            if (!screen) return;
+
+            // Dispara áudio do tiro
+            playGunshotSound();
+
+            // 1. Muzzle Flash Branco/Dourado (Clarão)
+            if (flash) {
+                flash.style.opacity = '1';
+                setTimeout(() => { flash.style.opacity = '0'; }, 110);
+            }
+
+            // 2. Chacoalhão Violento de Tela (Screen Shake)
+            screen.classList.add('animate-gunshot-shake');
+
+            // 3. Furo de Bala + Fissuras de Vidro Temperado
+            if (impact) {
+                impact.style.opacity = '1';
+                impact.style.transform = 'scale(1)';
+            }
+
+            // 4. Onda de Choque Balística
+            if (shockwave) {
+                shockwave.classList.add('animate-impact-shockwave');
+            }
+
+            // 5. Explosão de Faíscas Metálicas no Canvas
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            for (let i = 0; i < 45; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 12 + 3;
+                clickSparks.push({
+                    x: centerX,
+                    y: centerY,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    life: 1.0,
+                    color: Math.random() > 0.4 ? '#ff0033' : '#fbbf24'
+                });
+            }
+
+            // 6. Atualiza HUD
+            if (statusText) {
+                statusText.innerHTML = '<span class="text-white">🎯 DISPARO CONFIRMADO // IMPACTO NO ALVO</span>';
+            }
+            if (hud) {
+                setTimeout(() => { hud.style.opacity = '0.2'; }, 100);
+            }
+
+            // 7. Transição: Estilhaçamento e Revelação Suave do Site
+            setTimeout(() => {
+                screen.style.transition = 'opacity 0.75s ease-out, transform 0.75s ease-out, filter 0.75s ease-out';
+                screen.style.opacity = '0';
+                screen.style.transform = 'scale(1.12)';
+                screen.style.filter = 'blur(6px)';
+                screen.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    screen.style.display = 'none';
+                }, 800);
+            }, 1200);
+        }
+
+        function skipIntro(e) {
+            if (e) e.stopPropagation();
+            const screen = document.getElementById('intro-tactical-screen');
+            if (introAutoTimer) clearTimeout(introAutoTimer);
+            if (screen) {
+                screen.style.transition = 'opacity 0.3s ease';
+                screen.style.opacity = '0';
+                setTimeout(() => { screen.style.display = 'none'; }, 300);
+            }
+        }
+
+        // Tecla ESC para pular intro
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') skipIntro();
+        });
+
         window.addEventListener('resize', resizeCanvas);
         window.addEventListener('load', function () {
             initParticles();
@@ -2007,6 +2300,31 @@
             initCompareSlider();
             const slider = document.getElementById('compare-slider');
             if (slider) updateComparison(slider.value);
+
+            // Sequenciamento da Intro Balística
+            const introScreen = document.getElementById('intro-tactical-screen');
+            const introStatus = document.getElementById('intro-status');
+
+            if (introScreen) {
+                // Clique em qualquer lugar antecipa o tiro imediatamente
+                introScreen.addEventListener('click', () => {
+                    triggerGunshot();
+                });
+
+                // Calibração e disparo automático após breve contagem
+                setTimeout(() => {
+                    if (!introShotFired && introStatus) {
+                        introStatus.innerHTML = '<span class="text-emerald-400">🎯 ALVO BLOQUEADO // DISPARANDO...</span>';
+                        playMetallicClick(1400, 0.05);
+                    }
+                }, 700);
+
+                introAutoTimer = setTimeout(() => {
+                    if (!introShotFired) {
+                        triggerGunshot();
+                    }
+                }, 1300);
+            }
         });
     </script>
 </body>
