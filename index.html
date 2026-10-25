@@ -295,6 +295,16 @@
         .animate-impact-shockwave {
             animation: bulletImpactRing 0.6s ease-out forwards;
         }
+
+        /* Efeito de Fixação e Pulso do Brasão no Hero (Docking Effect) */
+        @keyframes dockPulse {
+            0% { transform: scale(0.95); filter: drop-shadow(0 0 20px rgba(225, 29, 72, 0.4)); }
+            50% { transform: scale(1.06); filter: drop-shadow(0 0 65px rgba(225, 29, 72, 1)) drop-shadow(0 0 95px rgba(245, 158, 11, 0.6)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(225, 29, 72, 0.7)); }
+        }
+        .animate-dock-pulse {
+            animation: dockPulse 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-rose-600 selection:text-white">
@@ -357,27 +367,35 @@
             </svg>
         </div>
 
-        <!-- HUD Central com Mira Tática Laser -->
+        <!-- HUD Central com Mira Tática Laser e Logo Oficial -->
         <div id="intro-hud" class="relative z-10 flex flex-col items-center justify-center text-center p-6 transition-all duration-300">
             <!-- Retículo Giratório Militar com Brasão Central -->
-            <div class="relative w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center mb-6">
-                <!-- Anel Externo Giratório -->
-                <svg class="absolute inset-0 w-full h-full text-rose-500/50 animate-gear-slow" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2" stroke-dasharray="14 8"/>
-                    <circle cx="50" cy="50" r="38" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6 4" stroke-opacity="0.7"/>
+            <div class="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center mb-6">
+                <!-- Halo Vermelho de Energia do Alvo -->
+                <div class="absolute inset-2 rounded-full bg-rose-600/20 blur-xl pointer-events-none"></div>
+
+                <!-- Anel Externo Giratório Militar -->
+                <svg class="absolute -inset-4 w-[calc(100%+32px)] h-[calc(100%+32px)] text-rose-500/50 animate-gear-slow pointer-events-none" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="47" stroke="currentColor" stroke-width="1.5" stroke-dasharray="14 8"/>
+                    <circle cx="50" cy="50" r="40" stroke="#f59e0b" stroke-width="1" stroke-dasharray="6 4" stroke-opacity="0.7"/>
                 </svg>
 
                 <!-- Anel Interno Reverso -->
-                <svg class="absolute w-28 h-28 text-rose-600/70 animate-gear-reverse" viewBox="0 0 100 100" fill="none">
-                    <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="3" stroke-dasharray="20 10"/>
+                <svg class="absolute -inset-1 w-[calc(100%+8px)] h-[calc(100%+8px)] text-rose-600/60 animate-gear-reverse pointer-events-none" viewBox="0 0 100 100" fill="none">
+                    <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2.2" stroke-dasharray="18 10"/>
                 </svg>
 
-                <!-- Mira Laser Cruzada -->
-                <div class="absolute w-full h-[1px] bg-rose-500/60 shadow-[0_0_8px_#ff0033]"></div>
-                <div class="absolute h-full w-[1px] bg-rose-500/60 shadow-[0_0_8px_#ff0033]"></div>
+                <!-- O Logo Oficial Central da Intro (Alvo do Tiro Balístico e Origem do Voo) -->
+                <div class="relative z-10 w-44 h-44 sm:w-52 sm:h-52 flex items-center justify-center">
+                    <img id="intro-flying-logo" src="logo.png" alt="Dr. das Armas" class="w-full h-full object-contain drop-shadow-[0_0_35px_rgba(225,29,72,0.85)] filter pointer-events-none select-none">
+                </div>
+
+                <!-- Mira Laser Cruzada Sobreposta -->
+                <div id="intro-cross-h" class="absolute w-full h-[1px] bg-rose-500/80 shadow-[0_0_10px_#ff0033] z-20 pointer-events-none"></div>
+                <div id="intro-cross-v" class="absolute h-full w-[1px] bg-rose-500/80 shadow-[0_0_10px_#ff0033] z-20 pointer-events-none"></div>
 
                 <!-- Ponto Vermelho Central Alinhado -->
-                <div id="intro-laser-dot" class="w-4 h-4 rounded-full bg-rose-600 border border-white shadow-[0_0_15px_#ff0033] flex items-center justify-center relative">
+                <div id="intro-laser-dot" class="w-4 h-4 rounded-full bg-rose-600 border border-white shadow-[0_0_18px_#ff0033] flex items-center justify-center z-20 pointer-events-none">
                     <div class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></div>
                 </div>
             </div>
@@ -595,10 +613,10 @@
                 </div>
 
                 <!-- Coluna Direita: Emblema Mecânico 3D Interativo (Reage ao Mouse) -->
-                <div class="lg:col-span-5 flex justify-center">
-                    <div id="hero-emblem" class="relative w-80 h-80 sm:w-[420px] sm:h-[420px] flex items-center justify-center select-none transition-transform duration-200 ease-out">
+                <div class="lg:col-span-5 flex justify-center py-4">
+                    <div id="hero-emblem" class="relative w-[340px] h-[340px] sm:w-[480px] sm:h-[480px] lg:w-[540px] lg:h-[540px] xl:w-[600px] xl:h-[600px] flex items-center justify-center select-none transition-transform duration-200 ease-out">
                         <!-- Halo Vermelho Pulsante -->
-                        <div class="absolute inset-4 rounded-full bg-rose-600/25 blur-3xl animate-pulse"></div>
+                        <div class="absolute inset-2 sm:inset-4 rounded-full bg-rose-600/30 blur-3xl animate-pulse"></div>
 
                         <!-- Anel Externo de Aço e Pistões SVG -->
                         <svg class="w-full h-full animate-gear-slow absolute inset-0 text-zinc-700" viewBox="0 0 400 400">
@@ -624,12 +642,12 @@
                         </svg>
 
                         <!-- Núcleo Central: Logo Oficial Dr. das Armas & Scanner Laser -->
-                        <div class="relative z-10 w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-gradient-to-b from-zinc-950 via-[#0a0a0f] to-black border-2 border-rose-500/80 shadow-[0_0_60px_rgba(225,29,72,0.65)] flex items-center justify-center p-3 overflow-hidden group">
+                        <div id="hero-emblem-core" class="relative z-10 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[420px] lg:h-[420px] xl:w-[460px] xl:h-[460px] rounded-full bg-gradient-to-b from-zinc-950 via-[#0a0a0f] to-black border-2 border-rose-500/80 shadow-[0_0_65px_rgba(225,29,72,0.7)] flex items-center justify-center p-4 sm:p-6 overflow-hidden group">
                             <!-- Linha de Scanner Laser Tático Vermelho -->
                             <div class="scanner-bar z-20"></div>
 
                             <!-- Imagem do Logo Oficial do Dr. das Armas -->
-                            <img src="logo.png" alt="Dr. das Armas - Oficina de Armas" class="w-full h-full object-contain relative z-10 drop-shadow-[0_0_25px_rgba(225,29,72,0.8)] group-hover:scale-105 transition-transform duration-500">
+                            <img id="hero-logo-img" src="logo.png" alt="Dr. das Armas - Oficina de Armas" class="w-full h-full object-contain relative z-10 drop-shadow-[0_0_30px_rgba(225,29,72,0.85)] group-hover:scale-105 transition-transform duration-500">
 
                             <!-- Vinheta Tática de Profundidade -->
                             <div class="absolute inset-0 rounded-full bg-gradient-to-t from-black/50 via-transparent to-black/30 pointer-events-none z-15"></div>
@@ -2109,6 +2127,7 @@
         // 8. Sistema de Intro Cinematográfica: Disparo Balístico na Tela
         let introShotFired = false;
         let introAutoTimer = null;
+        let introFlyingActive = false;
 
         function playGunshotSound() {
             if (!sfxEnabled) return;
@@ -2187,19 +2206,19 @@
 
             if (!screen) return;
 
-            // Dispara áudio do tiro
+            // Dispara áudio do tiro balístico
             playGunshotSound();
 
-            // 1. Muzzle Flash Branco/Dourado (Clarão)
+            // 1. Muzzle Flash Branco/Dourado (Clarão de pólvora)
             if (flash) {
                 flash.style.opacity = '1';
                 setTimeout(() => { flash.style.opacity = '0'; }, 110);
             }
 
-            // 2. Chacoalhão Violento de Tela (Screen Shake)
+            // 2. Chacoalhão Violento de Tela (Screen Shake Balístico)
             screen.classList.add('animate-gunshot-shake');
 
-            // 3. Furo de Bala + Fissuras de Vidro Temperado
+            // 3. Furo de Bala + Fissuras de Vidro Temperado exatamente sobre o centro do Logo
             if (impact) {
                 impact.style.opacity = '1';
                 impact.style.transform = 'scale(1)';
@@ -2213,9 +2232,9 @@
             // 5. Explosão de Faíscas Metálicas no Canvas
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-            for (let i = 0; i < 45; i++) {
+            for (let i = 0; i < 50; i++) {
                 const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 12 + 3;
+                const speed = Math.random() * 14 + 4;
                 clickSparks.push({
                     x: centerX,
                     y: centerY,
@@ -2228,34 +2247,101 @@
 
             // 6. Atualiza HUD
             if (statusText) {
-                statusText.innerHTML = '<span class="text-white">🎯 DISPARO CONFIRMADO // IMPACTO NO ALVO</span>';
-            }
-            if (hud) {
-                setTimeout(() => { hud.style.opacity = '0.2'; }, 100);
+                statusText.innerHTML = '<span class="text-white">🎯 IMPACTO CONFIRMADO // FIXANDO NO HERO...</span>';
             }
 
-            // 7. Transição: Estilhaçamento e Revelação Suave do Site
+            // 7. Transição Fluida: O Logo voa suavemente do centro da tela para o Hero
             setTimeout(() => {
-                screen.style.transition = 'opacity 0.75s ease-out, transform 0.75s ease-out, filter 0.75s ease-out';
-                screen.style.opacity = '0';
-                screen.style.transform = 'scale(1.12)';
-                screen.style.filter = 'blur(6px)';
-                screen.style.pointerEvents = 'none';
+                flyLogoToHero();
+            }, 420);
+        }
 
+        function flyLogoToHero() {
+            if (introFlyingActive) return;
+            introFlyingActive = true;
+
+            const screen = document.getElementById('intro-tactical-screen');
+            const introLogo = document.getElementById('intro-flying-logo');
+            const heroLogo = document.getElementById('hero-logo-img');
+            const heroEmblem = document.getElementById('hero-emblem');
+            const impact = document.getElementById('intro-bullet-impact');
+            const hud = document.getElementById('intro-hud');
+            const skipBtn = document.getElementById('intro-skip-btn');
+            const peripheralElements = document.querySelectorAll('#intro-hud svg, #intro-cross-h, #intro-cross-v, #intro-laser-dot, #intro-action-hint, #intro-hud .space-y-2');
+
+            if (!screen || !introLogo || !heroLogo) {
+                skipIntro();
+                return;
+            }
+
+            // Remove o shake para o movimento do voo ser ultra fluido
+            screen.classList.remove('animate-gunshot-shake');
+
+            // Garante scroll no topo para alinhamento geométrico perfeito
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            // Esconde elementos periféricos do HUD e o furo de bala para liberar o logo limpo
+            if (skipBtn) skipBtn.style.opacity = '0';
+            if (impact) {
+                impact.style.transition = 'opacity 0.28s ease-out';
+                impact.style.opacity = '0';
+            }
+            peripheralElements.forEach(el => {
+                el.style.transition = 'opacity 0.25s ease-out';
+                el.style.opacity = '0';
+            });
+
+            // Medições de coordenadas na viewport
+            const sourceRect = introLogo.getBoundingClientRect();
+            const targetRect = heroLogo.getBoundingClientRect();
+
+            const deltaX = (targetRect.left + targetRect.width / 2) - (sourceRect.left + sourceRect.width / 2);
+            const deltaY = (targetRect.top + targetRect.height / 2) - (sourceRect.top + sourceRect.height / 2);
+            const scaleRatio = targetRect.width / sourceRect.width;
+
+            // Fundo escuro da intro desvanece suavemente para revelar a página e o Hero
+            screen.style.transition = 'background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease-out';
+            screen.style.backgroundColor = 'transparent';
+
+            // Animação de Voo do Logo da Intro até o Hero
+            introLogo.style.transition = 'transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), filter 0.85s ease-out';
+            introLogo.style.transformOrigin = 'center center';
+            introLogo.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(${scaleRatio})`;
+            introLogo.style.filter = 'drop-shadow(0 0 50px rgba(225, 29, 72, 1)) drop-shadow(0 0 80px rgba(245, 158, 11, 0.8))';
+
+            // Ao finalizar a aterrissagem no Hero (850ms)
+            setTimeout(() => {
+                // Efeito de pulso e trava mecânica no Hero
+                if (heroEmblem) {
+                    heroEmblem.classList.add('animate-dock-pulse');
+                    setTimeout(() => {
+                        heroEmblem.classList.remove('animate-dock-pulse');
+                    }, 750);
+                }
+
+                // Som metálico de encaixe de ferrolho / travamento
+                playMetallicClick(1450, 0.08);
+
+                // Oculta e encerra a intro
+                screen.style.opacity = '0';
+                screen.style.pointerEvents = 'none';
                 setTimeout(() => {
                     screen.style.display = 'none';
-                }, 800);
-            }, 1200);
+                }, 300);
+            }, 850);
         }
 
         function skipIntro(e) {
             if (e) e.stopPropagation();
-            const screen = document.getElementById('intro-tactical-screen');
+            introShotFired = true;
+            introFlyingActive = true;
             if (introAutoTimer) clearTimeout(introAutoTimer);
+            const screen = document.getElementById('intro-tactical-screen');
             if (screen) {
-                screen.style.transition = 'opacity 0.3s ease';
+                screen.style.transition = 'opacity 0.25s ease';
                 screen.style.opacity = '0';
-                setTimeout(() => { screen.style.display = 'none'; }, 300);
+                screen.style.pointerEvents = 'none';
+                setTimeout(() => { screen.style.display = 'none'; }, 250);
             }
         }
 
