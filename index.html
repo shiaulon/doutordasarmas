@@ -216,10 +216,19 @@
             --mouse-y: 50%;
         }
 
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
         body {
             background-color: #070709;
             color: #f1f5f9;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            position: relative;
             cursor: crosshair;
         }
 
@@ -503,6 +512,13 @@
             transform: translateX(0) !important;
         }
 
+        /* Prevenção de estiramento lateral no mobile */
+        @media (max-width: 768px) {
+            .reveal-left, .reveal-right {
+                transform: translateY(24px) !important;
+            }
+        }
+
         /* Estilo da Aba Ativa do Seletor Antes & Depois */
         .active-compare-tab {
             background: linear-gradient(135deg, rgba(225, 29, 72, 0.25) 0%, rgba(16, 17, 22, 0.95) 100%) !important;
@@ -778,18 +794,18 @@
                     </p>
 
                     <!-- 3 Pilares em Destaque Rápido -->
-                    <div class="grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto lg:mx-0 pt-2">
-                        <div class="bg-zinc-900/90 border-l-2 border-rose-600 p-3.5 text-left hover:bg-zinc-800/80 transition">
-                            <span class="text-rose-500 font-orbitron font-bold text-xs block">/ 01</span>
-                            <span class="font-rajdhani font-bold text-white text-sm sm:text-lg uppercase tracking-wider">Manutenção</span>
+                    <div class="grid grid-cols-3 gap-2 sm:gap-4 max-w-xl mx-auto lg:mx-0 pt-2">
+                        <div class="bg-zinc-900/90 border-l-2 border-rose-600 p-2.5 sm:p-3.5 text-left hover:bg-zinc-800/80 transition">
+                            <span class="text-rose-500 font-orbitron font-bold text-[10px] sm:text-xs block">/ 01</span>
+                            <span class="font-rajdhani font-bold text-white text-xs sm:text-lg uppercase tracking-wider block truncate">Manutenção</span>
                         </div>
-                        <div class="bg-zinc-900/90 border-l-2 border-rose-600 p-3.5 text-left hover:bg-zinc-800/80 transition">
-                            <span class="text-rose-500 font-orbitron font-bold text-xs block">/ 02</span>
-                            <span class="font-rajdhani font-bold text-white text-sm sm:text-lg uppercase tracking-wider">Personalização</span>
+                        <div class="bg-zinc-900/90 border-l-2 border-rose-600 p-2.5 sm:p-3.5 text-left hover:bg-zinc-800/80 transition">
+                            <span class="text-rose-500 font-orbitron font-bold text-[10px] sm:text-xs block">/ 02</span>
+                            <span class="font-rajdhani font-bold text-white text-xs sm:text-lg uppercase tracking-wider block truncate">Personalização</span>
                         </div>
-                        <div class="bg-zinc-900/90 border-l-2 border-rose-600 p-3.5 text-left hover:bg-zinc-800/80 transition">
-                            <span class="text-rose-500 font-orbitron font-bold text-xs block">/ 03</span>
-                            <span class="font-rajdhani font-bold text-white text-sm sm:text-lg uppercase tracking-wider">Assessoria</span>
+                        <div class="bg-zinc-900/90 border-l-2 border-rose-600 p-2.5 sm:p-3.5 text-left hover:bg-zinc-800/80 transition">
+                            <span class="text-rose-500 font-orbitron font-bold text-[10px] sm:text-xs block">/ 03</span>
+                            <span class="font-rajdhani font-bold text-white text-xs sm:text-lg uppercase tracking-wider block truncate">Assessoria</span>
                         </div>
                     </div>
 
@@ -816,8 +832,8 @@
                 </div>
 
                 <!-- Coluna Direita: Emblema Mecânico 3D Interativo (Reage ao Mouse) -->
-                <div class="lg:col-span-5 flex justify-center py-4">
-                    <div id="hero-emblem" class="relative w-[340px] h-[340px] sm:w-[480px] sm:h-[480px] lg:w-[540px] lg:h-[540px] xl:w-[600px] xl:h-[600px] flex items-center justify-center select-none transition-transform duration-200 ease-out">
+                <div class="lg:col-span-5 flex justify-center py-4 overflow-hidden max-w-full">
+                    <div id="hero-emblem" class="relative w-[280px] h-[280px] min-[380px]:w-[320px] min-[380px]:h-[320px] sm:w-[480px] sm:h-[480px] lg:w-[540px] lg:h-[540px] xl:w-[600px] xl:h-[600px] flex items-center justify-center select-none transition-transform duration-200 ease-out max-w-full">
                         <!-- Halo Vermelho Pulsante -->
                         <div class="absolute inset-2 sm:inset-4 rounded-full bg-rose-600/30 blur-3xl animate-pulse"></div>
 
@@ -845,7 +861,7 @@
                         </svg>
 
                         <!-- Núcleo Central: Logo Oficial Dr. das Armas & Scanner Laser -->
-                        <div id="hero-emblem-core" class="relative z-10 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[420px] lg:h-[420px] xl:w-[460px] xl:h-[460px] rounded-full bg-gradient-to-b from-zinc-950 via-[#0a0a0f] to-black border-2 border-rose-500/80 shadow-[0_0_65px_rgba(225,29,72,0.7)] flex items-center justify-center p-4 sm:p-6 overflow-hidden group">
+                        <div id="hero-emblem-core" class="relative z-10 w-[220px] h-[220px] min-[380px]:w-[250px] min-[380px]:h-[250px] sm:w-[380px] sm:h-[380px] lg:w-[420px] lg:h-[420px] xl:w-[460px] xl:h-[460px] rounded-full bg-gradient-to-b from-zinc-950 via-[#0a0a0f] to-black border-2 border-rose-500/80 shadow-[0_0_65px_rgba(225,29,72,0.7)] flex items-center justify-center p-3 sm:p-6 overflow-hidden group">
                             <!-- Linha de Scanner Laser Tático Vermelho -->
                             <div class="scanner-bar z-20"></div>
 
@@ -1789,8 +1805,8 @@
         </div>
     </footer>
 
-    <!-- BOTÃO FLUTUANTE DE WHATSAPP OPERACIONAL (COM ONDA DE PULSO) -->
-    <div class="fixed bottom-6 right-6 z-50 flex items-center group">
+    <!-- BOTÃO FLUTUANTE DE WHATSAPP OPERACIONAL (COM ONDA DE PULSO CONTIDA) -->
+    <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-center group">
         <!-- Tooltip tático flutuante ao passar o mouse -->
         <div class="hidden md:flex items-center gap-2 mr-3 px-3.5 py-1.5 rounded-full bg-zinc-900/95 border border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.35)] text-emerald-400 font-orbitron text-xs uppercase tracking-wider pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
@@ -1798,12 +1814,12 @@
         </div>
 
         <button onclick="openWhatsAppModal()" aria-label="Abrir WhatsApp Dr. das Armas"
-                class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-emerald-600 via-emerald-500 to-green-400 text-white shadow-[0_0_25px_rgba(16,185,129,0.65)] hover:shadow-[0_0_40px_rgba(16,185,129,0.95)] hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center border-2 border-white/40 cursor-pointer">
-            <!-- Onda de pulso de radar -->
-            <span class="absolute inset-0 rounded-full border-2 border-emerald-400 animate-ping opacity-60 pointer-events-none"></span>
-            <i class="ph-fill ph-whatsapp-logo text-3xl sm:text-4xl text-white"></i>
+                class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-emerald-600 via-emerald-500 to-green-400 text-white shadow-[0_0_25px_rgba(16,185,129,0.65)] hover:shadow-[0_0_40px_rgba(16,185,129,0.95)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center border-2 border-white/40 cursor-pointer overflow-hidden">
+            <!-- Onda de pulso de radar contida internamente -->
+            <span class="absolute inset-0 rounded-full bg-emerald-400/25 animate-pulse pointer-events-none"></span>
+            <i class="ph-fill ph-whatsapp-logo text-3xl sm:text-4xl text-white relative z-10"></i>
             <!-- Ponto Verde Indicador Operacional -->
-            <span class="absolute top-0 right-0 w-4 h-4 rounded-full bg-emerald-400 border-2 border-zinc-950 flex items-center justify-center">
+            <span class="absolute top-1 right-1 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-zinc-950 flex items-center justify-center z-20">
                 <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
             </span>
         </button>
